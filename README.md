@@ -342,3 +342,16 @@ Obs não há fall-through por padrão temos que por a palavra reservada Fallthro
 criando fall-through
 default
 cases compostos
+
+# 07 Declaração Switch
+
+Switch:
+pode avaliar uma expressão 
+switch statement == case (value)
+default switch statement == true (bool)
+Obs não há fall-through por padrão temos que por a palavra reservada Fallthrough.
+criando fall-through
+default
+cases compostos
+
+OBS: POdemos por a variavel do switch como Generica, usadoa palavra reservada Interface, como isto ela vai filtrar de a cordo com o Tipo. 

@@ -126,5 +126,20 @@ func main() {
 		fmt.Println("x5 não é zero nem um, ele pula para o próximo case mesmo que não seja verdadeiro, isso é o fallthrough")
 	}
 
-	  
+	/**Filtrando não valores e sim TIPOS*/
+	fmt.Println("\n 08 Filtrando não valores e sim TIPOS")
+
+	switch v := interface{}(10); v.(type) {
+	case int:
+		fmt.Println("v é um int")
+	case string:
+		fmt.Println("v é um string")
+	case bool:
+		fmt.Println("v é um bool")
+	case float64:
+		fmt.Println("v é um float64")
+	default:
+		fmt.Println("v é de outro tipo")
+	}
+
 }

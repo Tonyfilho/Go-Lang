@@ -111,4 +111,86 @@ func main() {
 
 	fmt.Println(umaslice)
 
+	/**03D Slice e a Função MAKE()*/
+	fmt.Println()
+	fmt.Println("03D Slice e a Função MAKE()")
+
+	sliceMake := make([]int, 5, 10)
+	/*Tribuindo valores ao slice em linha*/
+	sliceMake[0], sliceMake[1], sliceMake[2], sliceMake[3], sliceMake[4] = 1, 2, 3, 4, 5
+
+	/* de acordo com a capacidade do slice,
+	o append vai aumentar a capacidade do slice para 10,
+	pois o slice foi criado com capacidade de 10.*/
+
+	sliceMake = append(sliceMake, 6)
+	/* o append serve para aumentar a capacidade do slice,
+	   caso o slice seja criado com capacidade
+	    menor que a quantidade de elementos que serão adicionados.*/
+
+	sliceMake = append(sliceMake, 7)
+	sliceMake = append(sliceMake, 8)
+	sliceMake = append(sliceMake, 9)
+	sliceMake = append(sliceMake, 10)
+
+	fmt.Println(sliceMake, len(sliceMake), cap(sliceMake)) //[1 2 3 4 5 6 7 8 9 10] 10 10
+
+	sliceMake = append(sliceMake, 10)
+
+	fmt.Println(sliceMake, len(sliceMake), cap(sliceMake)) //[1 2 3 4 5 6 7 8 9 10 10] 11 20
+
+	/**03E Slice e a Multidimensional ou Matrizes*/
+	fmt.Println()
+	fmt.Println("03E Slice Multidimensional ou Matrizes")
+
+	ss2 := [][]int{
+		// Índice: 0  1  2                   // Índice:
+		[]int{1, 2, 3, 4, 5, 6},       // 0
+		[]int{7, 8, 9, 10, 11, 12},    // 1
+		[]int{13, 14, 15, 16, 17, 18}, // 2
+	}
+	fmt.Println("Matriz [2][4]:", ss2[2][4])
+
+	ss4 := [][][][]int{
+
+		[][][]int{
+			[][]int{
+				[]int{1, 2, 3, 4, 5, 6},
+			},
+			[][]int{
+				[]int{10, 20, 30, 40, 50},
+			},
+		},
+
+		[][][]int{
+			[][]int{
+				[]int{2, 4, 6, 8, 10},
+			},
+			[][]int{
+				[]int{3},
+			},
+		},
+	}
+	fmt.Println("Matriz 4D [1][0][0][2]:", ss4[1][0][0][2])
+
+	
+	/**03F Slice a surpresa do array subjacente*/
+	fmt.Println()
+	fmt.Println("03F Slice a surpresa do array subjacente")
+
+	
+	primeiroslice := []int{1, 2, 3, 4, 5}
+	
+	fmt.Println(primeiroslice) //[1 2 3 4 5]
+	/**usando append para pegando dados do índice 0 a 2 e do índice 4 ao final*/
+	segundoslice := append(primeiroslice[:2], primeiroslice[4:]...)
+
+	fmt.Println(segundoslice) //[1 2 5]
+	/**O append acima alterou o array subjacente do slice primeiroslice, pois o slice segundoslice e o slice primeiroslice compartilham o mesmo array subjacente.*/
+
+	fmt.Println(primeiroslice) 
+	/** Modifica a referência da memoria, saida [1 2 5 4 5] - o valor do índice 2 foi alterado para 5, 
+	pois o slice segundoslice compartilha o mesmo array subjacente
+	 do slice primeiroslice.*/
+
 }

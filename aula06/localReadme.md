@@ -58,3 +58,42 @@ Todd: unfurl → desdobrar, desenrolar
 Nome oficial: enumeration
 Go Playground: https://play.golang.org/p/RpkDCTumpT
 ... o operador  unFurl é o mesmo que rest ou destruction
+
+# 03D Slice Make
+
+Slices são feitas de arrays.
+Elas são dinâmicas, podem mudar de tamanho.
+Sempre que isso acontece, um novo array é criado e os dados são copiados.
+É conveniente, mas tem um custo computacional.
+Para otimizar as coisas, podemos utilizar make.
+make([]T, len, cap)
+"The length of a slice may be changed as long as it still fits within the limits of the underlying array; just assign it to a slice of itself. The capacity of a slice, accessible by the built-in function cap, reports the maximum length the slice may assume."
+len(x), cap(x)
+x[n] onde n é maior que len é out of range. Use append.
+Append maior que cap modifica o array subjacente.
+pkg/builtin/#append: "If it has sufficient capacity, the destination is resliced to accommodate the new elements. If it does not, a new underlying array will be allocated."
+Effective Go.
+Go Playground: https://play.golang.org/p/e8GWzyEEL8
+
+
+# 03E Slice Multi-Dimentional
+
+Slices multi-dimensionais são slices que contem slices.
+São como planilhas.
+[][]type
+Go Playground: https://play.golang.org/p/vKyHiG1GtM
+Só pra sacanear: https://play.golang.org/p/ZSU_8eJ9Yp
+
+# 03F Slice a surpresa do array subjacente
+OBS: Modificação da referencia de memoria
+Isso tudo aqui a gente já viu:
+Toda slice tem um array subjacente.
+Um slice é: um ponteiro/endereço para um array, mais len e cap (que é o len to array).
+Exemplo:
+x := []int{...números}
+y := append(x[:i], x[:i]...)
+pkg/builtin/#append: "If it has sufficient capacity, the destination is resliced to accommodate the new elements. If it does not, a new underlying array will be allocated."
+Ou seja, y utiliza o mesmo array subjacente que x.
+O que nos dá um resultado inesperado.
+Ou seja, bom saber de antemão pra não ter que aprender na marra.
+Go Playground: https://play.golang.org/p/BBJLuIjU_i

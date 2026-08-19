@@ -355,3 +355,232 @@ default
 cases compostos
 
 OBS: POdemos por a variavel do switch como Generica, usadoa palavra reservada Interface, como isto ela vai filtrar de a cordo com o Tipo. 
+
+
+
+#### Aula06 Operadores logicos condicionais e Agrupamentos de dados
+
+# 01 Operadores Lógicos
+&&
+||
+!
+Go Playground: https://play.golang.org/p/MFwrt93xlc
+Qual o resultado de fmt.Println...
+true && true
+true && false
+true || true
+true || false
+!true
+
+# 02 Agrupamentos de Dados
+
+Estruturas de dados, ou agrupamentos de dados, nos permitem agrupar valores diferentes. Estes valores podem ser ou não do mesmo tipo.
+As estruturas que veremos são: arrays, slices, structs e maps.
+Vamos começar com arrays. Arrays em Go são uma fundação, e não algo que utilizamos todo dia.
+Seu tamanho deve estar presente na declaração: var x [n]int
+Atribui-se valores a suas posições com: x[i] = y (0-based)
+Para ver o tamanho usa-se: len(x)
+ref/spec: "The length is part of the array's type" → [5]int != [6]int
+Effective Go: Arrays são úteis para [umas coisas que a gente não vai fazer nunca] e servem de fundação para slices. Use slices ao invés de arrays.
+Go Playground: https://play.golang.org/p/Fv-sDF-ryZ
+
+# 03 Slices
+O que são tipos de dados compostos? 
+Wikipedia: Composite_data_type
+Effective Go: Composite literals
+ref/spec: Composite literals
+Uma slice agrupa valores de um único tipo.
+Criando uma slice: literal composta → x := []type{values}
+Go Playground: https://play.golang.org/p/W7Cxm8NPZC
+
+# 03B Dividindo um SLICE, fatiando ou deletando de uma fatia
+x[:] // SEM RANGE, VEM TODOS OS ITENS é o default, 
+x[a:], x[:b], x[a:b]
+"a" é incluso;
+"b" não é.
+Exemplo: cabeça magnética de um disco rígido (relógio, fita).
+Off-by-one error.
+Go Playground: https://play.golang.org/p/i5ZOLKb3Fi
+É fatiando que se deleta um item de uma slice. Na prática:
+x := append(x[:i], x[:i]...)
+Go Playground: https://play.golang.org/p/xK2HwCqvwd
+Exercício: tente acessar todos os itens de uma slice sem utilizar range.
+Solução: https://play.golang.org/p/aUC9qVCobH
+Como este conteúdo foi criado
+
+# 03C Slice e a Função Append()
+
+Effective Go: append (package builtin)
+x = append(slice, ...values)
+x = append(slice, slice...)
+Todd: unfurl → desdobrar, desenrolar
+Nome oficial: enumeration
+Go Playground: https://play.golang.org/p/RpkDCTumpT
+... o operador  unFurl é o mesmo que rest ou destruction
+
+# 03D Slice Make
+
+Slices são feitas de arrays.
+Elas são dinâmicas, podem mudar de tamanho.
+Sempre que isso acontece, um novo array é criado e os dados são copiados.
+É conveniente, mas tem um custo computacional.
+Para otimizar as coisas, podemos utilizar make.
+make([]T, len, cap)
+"The length of a slice may be changed as long as it still fits within the limits of the underlying array; just assign it to a slice of itself. The capacity of a slice, accessible by the built-in function cap, reports the maximum length the slice may assume."
+len(x), cap(x)
+x[n] onde n é maior que len é out of range. Use append.
+Append maior que cap modifica o array subjacente.
+pkg/builtin/#append: "If it has sufficient capacity, the destination is resliced to accommodate the new elements. If it does not, a new underlying array will be allocated."
+Effective Go.
+Go Playground: https://play.golang.org/p/e8GWzyEEL8
+
+
+# 03E Slice Multi-Dimentional
+
+Slices multi-dimensionais são slices que contem slices.
+São como planilhas.
+[][]type
+Go Playground: https://play.golang.org/p/vKyHiG1GtM
+Só pra sacanear: https://play.golang.org/p/ZSU_8eJ9Yp
+
+# 03F Slice a surpresa do array subjacente
+OBS: Modificação da referencia de memoria
+Isso tudo aqui a gente já viu:
+Toda slice tem um array subjacente.
+Um slice é: um ponteiro/endereço para um array, mais len e cap (que é o len to array).
+Exemplo:
+x := []int{...números}
+y := append(x[:i], x[:i]...)
+pkg/builtin/#append: "If it has sufficient capacity, the destination is resliced to accommodate the new elements. If it does not, a new underlying array will be allocated."
+Ou seja, y utiliza o mesmo array subjacente que x.
+O que nos dá um resultado inesperado.
+Ou seja, bom saber de antemão pra não ter que aprender na marra.
+Go Playground: https://play.golang.org/p/BBJLuIjU_i
+
+
+
+#### Maps
+
+## comparações
+
+## 3. Comparação com outras linguagens
+# Linguagem	Estrutura Chave-Valor	Set (Valores Únicos)
+# Go	map[K]V	Não tem nativo (simula com map[K]struct{})
+# Python	dict	set
+# JavaScript	Object / Map	Set
+# Java	HashMap<K,V>	HashSet<T>
+# C#	Dictionary<TKey,TValue>	HashSet<T>
+# Rust	HashMap<K,V>	HashSet<T>
+
+# 01 Maps Introdução
+
+Utiliza o formato key:value.
+E.g. nome e telefone
+Performance excelente para lookups.
+map[key]value{ key: value }
+Acesso: m[key]
+Key sem value retorna zero. Isso pode trazer problemas.
+Para verificar: comma ok idiom.
+v, ok := m[key]
+ok é um boolean, true/false
+Na prática: if v, ok := m[key]; ok { }
+Para adicionar um item: m[v] = value
+Maps não tem ordem.
+Go Playground: https://play.golang.org/p/JXDdJan8Ev
+
+
+# 02 Maps  range & deletando
+
+Range: for k, v := range map { }
+Reiterando: maps não tem ordem e um range usará uma ordem aleatória.
+Go Playground: https://play.golang.org/p/6zEMfIP-AE
+delete(map, key)
+Deletar uma key não-existente não retorna erros!
+Go Playground: https://play.golang.org/p/0uuIicU3Zz
+
+
+#### Struct
+# https://go.dev/ref/spec
+
+# 01 Struct inicio https://go.dev/ref/spec#Struct_types
+Struct é um tipo de dados composto que nos permite armazenar valores de tipos diferentes.
+Seu nome vem de "structure," ou estrutura.
+Declaração: type x struct { y: z }
+Acesso: x.y
+Exemplo: nome, idade, fumante.
+Go Playground: https://play.golang.org/p/5i0DqxuBp1
+
+OBs: O Struct é o Objeto do Js e TypeScript
+
+# 02 Structs 
+
+É importante se familiarizar com a documentação da linguagem Go.
+Neste vídeo vamos ver um pouco sobre o que a documentação diz sobre structs.
+Veremos:
+ref/spec
+Já vimos mais da metade dos tipos em Go!
+Struct types.
+x, y int
+anonymous fields
+promoted fields
+Go Playground: https://play.golang.org/p/z9UQej4IQT
+## OBS: O acesso aos campos é iqual ao Java Ex: pessoa.idade
+
+# 03 Structs Anonimos
+
+São structs sem identificadores.
+x := struct { name type }{ name: value }
+Go Playground: https://play.golang.org/p/xyhNnSCu1f
+
+
+
+#### Funções
+
+# 01  Funções  https://go.dev/ref/spec#Function_types
+Qual a utilidade de funções?
+Abstrair funcionalidade
+Reutilização de código
+# Temos q ter esta extrutura, func (receiver) identifier(parameters) (returns) { code }
+# É algo assim: func (receiver) NomeDaFução(QualquerCoisaOuTipoDeDado) (Tipo de dado Retornado Ex: String, ou uma soma, ou uma outra Função, lembrando q podemos ter mais de um retorno ) { É o que vc vai programar}
+A diferença entre parâmetros e argumentos:
+Funções são definidas com parâmetros
+Funções são chamadas com argumentos
+Parâmetro pode ser ...variádico tem que ser o ultimo paramentro
+Pass by reference, pass by copy, ... não.
+# Obs: Tudo em Go é pass by value. Ou seja é o temos dentro da Variavel e não a Referencia de memoria criada
+Exemplos:
+Função básica. 
+Go Playground: https://play.golang.org/p/FebJblBenP
+Função que aceita um argumento. 
+Go Playground: 
+        https://play.golang.org/p/CE6Ij3U4QB
+Função com retorno. 
+Go Playground: https://play.golang.org/p/gKxwYe6btP
+Função com múltiplos retornos e parâmetro variádico.
+Go Playground: https://play.golang.org/p/OcQ1wXwM2c
+Mais um: https://play.golang.org/p/8wc2TA9xH_
+
+
+# 02 Funções Desenrolando (enumerando) uma slice
+
+Quando temos uma slice, podemos passar os elementos individuais através "deste..." operador.
+Exemplos:
+Desenrolando uma slice de ints com como argumento para a função "soma" anterior
+Go Playground: https://play.golang.org/p/k8O3__8UDa
+Pode-se passar zero ou mais valores
+Go Playground: https://play.golang.org/p/C238I9n7Vs
+O parâmetro variádico deve ser o parâmetro final → ref/spec#Passing_arguments_to_..._parameters
+Go Playground: https://play.golang.org/p/8wc2TA9xH_
+Não roda: https://play.golang.org/p/2qTAnLWfgB
+
+
+# 03 Funções Defer siguinifica Postergar ou Adiar
+
+Funções são ótimas pois tornam nosso código modular. Podemos alterar partes do nosso programa sem afetar o resto!
+# Obs: Uma declaração DEFER chama uma função cuja execução ocorrerá no momento em que a função da qual ela faz parte finalizar.
+Essa finalização pode ocorrer devido a um return, ao fim do code block da função, ou no caso de pânico em uma goroutine correspondente.
+"Deixa pra última hora!", cria assincronismo
+ref/spec
+Sempre usamos para fechar um arquivo após abri-lo.
+Ex: Abrir e fecha conexão de rede.
+Go Playground: https://play.golang.org/p/sFj8arw0E_

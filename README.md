@@ -584,3 +584,19 @@ ref/spec
 Sempre usamos para fechar um arquivo após abri-lo.
 Ex: Abrir e fecha conexão de rede.
 Go Playground: https://play.golang.org/p/sFj8arw0E_
+
+
+
+#### Aula10 Funções
+
+# 01 Funções Inicio
+
+Um método é uma função anexada a um tipo.
+Quando se anexa uma função a um tipo, ela se torna um método desse tipo.
+Pode-se anexar uma função a um tipo utilizando seu receiver.
+Utilização: valor.método()
+Exemplo: o tipo "pessoa" pode ter um método oibomdia()
+Go Playground: https://play.golang.org/p/tQtoqUBpY5
+
+
+#### Aula10B Funções, Interfaces & polimorfismo

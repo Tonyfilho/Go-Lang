@@ -36,3 +36,10 @@ Sort
 DB
 Writer interface: arquivos locais, http request/response
 Se isso estiver complicado, não se desespere. É foda mesmo. Com tempo e prática a fluência vem.
+
+## OBS: Implementação Automatica
+A Interface q por sua vez está dentro do  Metodo SerHumano(g gente) e temos 2 STRUCTs que usam o mesmo NOME do Metodo que temos que implementar da Interface
+, basta passar o valor que temos na Interface Gente. Observe que: Não tenho ftm.print() sendo invocado pelo metodo serHumando(g gente), mesmo assim conseguimos imprimir, ou seja: 
+Em Go não precisamos IMPLEMENTAR as Interfaces, elas são automaticamente Implementadas, basta usar o mesmo nome de Metodo. Ex:Não precisei invocar oiBomDIa(), somente  passei a variavel localArquiteto.
+
+# Temos TIPOS diferentes (Ou seja classes que usam a mesma interface)

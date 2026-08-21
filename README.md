@@ -588,6 +588,7 @@ Go Playground: https://play.golang.org/p/sFj8arw0E_
 
 
 #### Aula10 Funções
+# Obs: como temos mais de 1 File e o package é o mesmo temos que adcionar todos eles na execução Ex: go run main.go pessoa.go
 
 # 01 Funções Inicio
 
@@ -600,3 +601,37 @@ Go Playground: https://play.golang.org/p/tQtoqUBpY5
 
 
 #### Aula10B Funções, Interfaces & polimorfismo
+
+# 01 Polimorfismo em Go
+
+# Declaração: keyword identifier type → type x interface
+Em Go, valores podem ter mais que um tipo.
+Uma interface permite que um valor tenha mais que um tipo.
+## Em Go um Interface é um conjunto de Metodos, e como se fosse um Ovo , quem herdar implementa o tipo de ovo, Ex: Ovo de Avestruz, de Galinha, de Cordona etc.. cada um em tamanhos diferentes, mas todos tem clara e gema.
+
+Após declarar a interface, deve-se definir os métodos necessários para implementar essa interface.
+
+## OBS: Em Go, todos os Tipos Criados (type) implementam automaticamente a Interface{} VAZIA.
+Se um tipo possuir todos os métodos necessários (que, no caso da interface{}, pode ser nenhum) então esse tipo implicitamente implementa a interface.
+Esse tipo será o seu tipo e também o tipo da interface.
+
+## OBS: Em Go não preciso implementar, caso seja contruido os mesmo Metodo que a Interface Ovo tem, Automaticamente fica implementado.
+
+
+Exemplos:
+Os tipos profissão1 e profissão2 contem o tipo pessoa
+Cada um tem seu método oibomdia()*, e podem dar oi utilizando *pessoa.oibomdia()
+Implementam a interface gente
+Ambos podem acessar o função serhumano() que chama o método oibomdia() de cada gente
+Tambem podemos no método serhumano() tomar ações diferentes dependendo do tipo:
+        switch pessoa.(type) { case profissão1: fmt.Println(h.(profissão1).valorquesóexisteemprofissão1) [...] }* 
+Go Playground pré-pronto: https://play.golang.org/p/VLbo_1uE-U
+    https://play.golang.org/p/zGKr7cvTPF
+
+
+## OBS: Implementação Automatica
+A Interface q por sua vez está dentro do  Metodo SerHumano(g gente) e temos 2 STRUCTs que usam o mesmo NOME do Metodo que temos que implementar da Interface
+, basta passar o valor que temos na Interface Gente. Observe que: Não tenho ftm.print() sendo invocado pelo metodo serHumando(g gente), mesmo assim conseguimos imprimir, ou seja: 
+Em Go não precisamos IMPLEMENTAR as Interfaces, elas são automaticamente Implementadas, basta usar o mesmo nome de Metodo. Ex:Não precisei invocar oiBomDIa(), somente  passei a variavel localArquiteto.
+
+# Temos TIPOS diferentes (Ou seja classes que usam a mesma interface)

@@ -635,3 +635,165 @@ A Interface q por sua vez está dentro do  Metodo SerHumano(g gente) e temos 2 S
 Em Go não precisamos IMPLEMENTAR as Interfaces, elas são automaticamente Implementadas, basta usar o mesmo nome de Metodo. Ex:Não precisei invocar oiBomDIa(), somente  passei a variavel localArquiteto.
 
 # Temos TIPOS diferentes (Ou seja classes que usam a mesma interface)
+
+
+#### Aula10C Interfaces Auto Implementáveis E do Switch Case de TIPOs
+# Obs: como temos mais de 1 File e o package é o mesmo temos que adcionar todos eles na execução Ex: go run main.go pessoa.go
+
+## Uso da mesma interface em TIPOS diferentes e Auto Implenents 
+# em Go um interface Auto Implementa, bastando que tem for usar ter o mesmo nome de seus Metodo(s).
+Neste exemplo abaixo veremos que a mesma Interface calcula um circulo e um retangulo, é a aplicação do S do Solid
+https://gobyexample.com/interfaces  
+
+https://play.golang.org/p/zGKr7cvTPF
+Go Playground ao vivo: 
+    https://play.golang.org/p/njiKbTT20Cr
+Onde se utiliza?
+Área de formas geométricas (gobyexample.com)
+Sort
+DB
+Writer interface: arquivos locais, http request/response
+Se isso estiver complicado, não se desespere. É foda mesmo. Com tempo e prática a fluência vem.
+
+
+# Obs: ao uso do ... o que chamo de Destruction ou Rest
+type arquiteto struct {
+	pessoa           // desta forma tenho acesso ao modo inteligente de Rest ... ou Destruction ... bastando passar variavel.nome
+	tipoDeConstrucao string
+}
+
+type dentista struct {
+	pessoa  pessoa // desta forma o modo inteligente do ... Rest ou Destructions não funciona, tenho q fazer variavel.pessoa.nome
+	denteExtraidos int
+	salarios  float64
+}
+
+
+#### Aula11 Funções Anônimas
+
+## Muito usado para Go Roroutine e Funções descartaveis
+
+Anonymous self-executing functions → Funções anônimas auto-executáveis.
+func(p params) { ... }()
+Go Playground: https://play.golang.org/p/Rnqmo6X6jh
+
+# Nas funções anonimas não temos nome e para fazer a invocação usamos (x), onde X é a variavel
+
+Aqui declara e executa ao mesmo tempo
+Vamos ver bastante quando falarmos de goroutines.
+
+As Funções anomimas podem ter paramentros Varidico Ex: x ... int e Retorno iqualmente as outras
+
+#### Aula11A Func como expressão
+
+f := func(p params){ ... }
+f()
+Go Playground: https://play.golang.org/p/cPxhPUbfLy
+
+Podemo usar uma função como se fosse uma variavel, Ou seja estou atribuido uma Varivel um valor
+após a execução e invocaremos como uma função nomal 
+
+
+#### Aula11B Func Retorno Retornando uma função ou Recursividade
+
+Pode-se usar uma função como retorno de uma função
+Declaração: func f() return
+Exemplo: func f() func() int { [...]; return func() int{ return [int] } }
+????: fmt.Println(f()())
+Go Playground: https://play.golang.org/p/zPjoWNrCJF
+
+# OBS: Função recursiva
+1º func é para criar uma função Ex: retornaumafuncao()
+2º func é para criar a tipagem Ex: func(int) int, neste caso recebe um int e retorna um int
+3º func é o retorno da função que retorna outra função
+1º retorno é o retorno da função criada 
+2º retorno é o retorno da função retornada
+func retornaumafuncao() func(int) int {
+	return func(i int) int {
+		return i * 10
+	}
+}
+
+#### Aula12 Callbacks, são funções que recebe um Argumento outra Função muito comum em JS
+
+Primeiro veja se você entende isso: https://play.golang.org/p/QkAtwMZU-z
+Callback é passar uma função como argumento.
+Exemplo:
+Criando uma função que toma uma função e um []int, e usa somente os números pares como argumentos para a função.
+Go Playground:
+Desafio: Crie uma função no programa acima que utilize somente os números ímpares.
+
+t := somentePares(soma, []int{50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60}...)
+	fmt.Println(t)
+
+## OBS
+
+A diferença é sutil mas importante:
+
+Parâmetro (Parâmetro Formal)
+São as variáveis declaradas na definição da função
+
+Servem como "espaços reservados" que receberão valores
+
+Fazem parte da assinatura da função
+
+Argumento (Argumento Real)
+São os valores reais que você passa para a função quando a chama
+
+São os dados concretos que preenchem os parâmetros
+
+#### Aula12B Closure
+# https://www.youtube.com/watch?v=mOM0qTB5ppU&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=96
+
+Muito parecido com Callback, sem receber a função com argumento mas retorna valores internos do escopo.
+# Closure é cercar ou capturar um scope para que possamos utilizá-lo em outro contexto. Já vimos:
+## Closures é quando capturamos um determinado ESCOPO e usamos este valor para algo
+Package-level scope
+Function-level scope
+Code-block-in-code-block scope
+Exemplo de closure:
+func i() func() int { x := 0; return func() int { x++; return x } }
+Quando fizermos a := i() teremos um scope, um valor para x.
+Quando fizermos b := i() teremos outro scope, e x terá um valor independente do x acima.
+Closures nos permitem salvar dados entre function calls e ao mesmo tempo isolar estes dados do resto do código.
+Go Playground: https://play.golang.org/p/AdFciYwI2Z
+
+# OBS: Para cada invocação é somando o valor de X, nas funções Callback o retorno fica de fora do ESCOPO da função interna, aqui o retorno fica DENTRO do Escopo, com isto cada invocação somará a invocação anterior neste caso .
+Ex: x++  return x
+O Retorno fica dentro da função callback e não do lado de fora 
+
+func i() func() int {
+	// OU seja esta variavel X terá valores diferentes para cada Referencia de Memoria
+	// E ainda somará o valores nas mesma Referencia de memoria.
+	x := 0 // será usado uma variavel do escopo Externo, gerando copias diferentes para cada Expressão Criada 
+
+	// aqui em baixo termos o CLOSURE onde retornamos o valor deste escopo interno{...} e não extermo{{...}}
+	return func() int {
+		///Ou seja para cada Invocação, será somado os valor de X
+		x++
+		return x
+	}
+}
+
+
+#### Func Recursividade
+
+https://www.youtube.com/watch?v=1-pop5h5RAs&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=97
+
+# https://pt.wikipedia.org/wiki/Efeito_Droste
+
+# https://pt.wikipedia.org/wiki/Matriosca
+
+# https://pt.wikipedia.org/wiki/Fractal
+
+
+
+WP: "The most common application of recursion is in mathematics and computer science, where a function being defined is applied within its own definition."
+Exemplos de recursividade: Fractais, matrioscas, efeito Droste (o efeito produzido por uma imagem que aparece dentro dela própria), GNU (“GNU is Not Unix”), etc.
+No estudo de funções: é uma função que chama a ela própria.
+Exemplo: fatoriais.
+4! = 4 * 3 * 2 * 1 (e no zero, deu.)
+Com recursividade. Go Playground: https://play.golang.org/p/ujsLnUhRp_
+Com loops. Go Playground: https://play.golang.org/p/F2VsUjYVhc
+
+

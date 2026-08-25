@@ -22,10 +22,16 @@ func fatorial(x int) int {
 	return x * fatorial(x-1)
 }
 
+
+/**Criando um loop no lugar da recursividade*/
 func loops(x int) int {
+	// 1º Cria a variavel que retornará, qualquer numero multiplicado por 1 será ele mesmo
 	total := 1
+	// 2º faço um FOR de uma variavel x que deve ser MAIOR que 1
 	for x > 1 {
+		// 3º faço o multiplicação dentro do for da variavel X e faço a atribuição para a varial Total
 		total *= x // total = total * x
+		// 4º tenho que fazer o decremento da variavel X
 		x--
 	}
 	return total

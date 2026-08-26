@@ -13,6 +13,18 @@ true || true
 true || false
 !true
 
+
+#### Aula06B    Tabela de Agrupamentos
+# Tabela Comparativa Rápida
+# Tipo	    Tamanho	     Mutável	Por Valor/Ref	Nil possível?	Mais usado
+# Array	    Fixo	      Sim	        Valor	         ❌	         Raro
+# Slice	    Dinâmico	  Sim	        Referência	     ✅	         MUITO
+# Map	    Dinâmico	  Sim	        Referência	     ✅	         MUITO
+# Struct    Fixo	      Sim	        Valor	         ❌         * MUITO
+# Ponteiro	Fixo	      Sim	        Referência	     ✅	         Médio
+# Interface	Dinâmico	  N/A	        Referência	     ✅	         MUITO
+*Struct pode ser nil se for ponteiro para struct
+
 # 02 Agrupamentos de Dados
 
 Estruturas de dados, ou agrupamentos de dados, nos permitem agrupar valores diferentes. Estes valores podem ser ou não do mesmo tipo.

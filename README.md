@@ -938,3 +938,92 @@ Channels (chan T)
 Functions
 Interfaces
 
+
+#### aula15B Go Marchal (Ordenação) em Json
+# De Go para Json
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=114
+
+Exemplo: transformando structs em Go em código JSON.
+No improviso tambem.
+Go Playground: https://play.golang.org/p/_JvCOlK-H9
+
+
+
+#### Aula15 C UnMarshal (Desordenando) Json
+# De Json para GO
+https://www.youtube.com/watch?v=mcbj-wy8Ro8&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=116
+https://pkg.go.dev/encoding/json#Unmarshal
+https://mholt.github.io/json-to-go/
+
+E agora o contrário.
+JSON-to-Go
+Marshal/unmarshal vs. encoder/decoder
+Marshal vai pra uma variável
+Tags
+Encoder "vai direto"
+# `json:"Nome"`  Isto são as Tags Encoder
+Ex de uso das Tags Encoder no Campo Profissão que recebe Trabalho, poderia ser o contrario tb
+Go Playground: https://play.golang.org/p/l6wbuLu1NS
+Com Encoder: https://play.golang.org/p/Pgwr0O07aL
+
+## Precisamos Criar uma função de UnMarshal
+# O retorno vem Nulo ou em um Ponteiro `v` , tem que haver os mesmo campos, caso contrario teremos error `errors.ErrUnsupported`
+
+func Unmarshal(data []byte, v any) error
+
+A função `Unmarshal` analisa os dados codificados em JSON e armazena o resultado no valor apontado por `v`. Se `v` for nulo ou não for um ponteiro, `Unmarshal` retorna um erro `InvalidUnmarshalError`.
+
+A função `Unmarshal` utiliza o inverso das codificações usadas por `Marshal`, alocando mapas, fatias e ponteiros conforme necessário, com as seguintes regras adicionais:
+
+Para desserializar JSON em um ponteiro, `Unmarshal` primeiro trata o caso em que o JSON é um literal JSON nulo. Nesse caso, `Unmarshal` define o ponteiro como nulo. Caso contrário, `Unmarshal` desserializa o JSON para o valor apontado pelo ponteiro. Se o ponteiro for nulo, `Unmarshal` aloca um novo valor para ele apontar.
+
+A entrada JSON é decodificada de acordo com as seguintes regras:
+
+Se o tipo de valor implementar `jsonv2.UnmarshalerFrom`, o método `UnmarshalJSONFrom` será chamado para decodificar o valor JSON. Se o método retornar `errors.ErrUnsupported`, a entrada será decodificada de acordo com as regras subsequentes.
+
+Se o tipo de valor implementar `Unmarshaler`, o método `UnmarshalJSON` será chamado para decodificar o valor JSON, inclusive quando a entrada for um JSON nulo.
+
+Se o valor implementar `encoding.TextUnmarshaler` e a entrada for uma string JSON, o método `UnmarshalText` será chamado com a string sem aspas.
+
+#### Aula15D UnMarshal E Marshal com as Funções NewDecoder NewEncoder
+# Continuação do video depois do minuto 10
+https://www.youtube.com/watch?v=mcbj-wy8Ro8&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=116
+https://cs.opensource.google/go/go/+/refs/tags/go1.27.0:src/encoding/json/v2_stream.go;l=38
+
+
+Marshal/unmarshal vs. encoder/decoder
+Marshal vai pra uma variável
+Encoder "vai direto"
+
+## Resumo, todo Encoder que eu fizer é para IR direto para Interface os.Stdout, sem variaveis
+	encoder := json.NewEncoder(os.Stdout)
+
+	encoder.Encode(toniFilho) //{"Nome":"Tony","SobreNome":"Filho","Idade":40,"Profissao":"Developer","ContaBancaria":1000}
+
+Com Encoder: https://play.golang.org/p/Pgwr0O07aL
+
+## Aqui podemos fazer Encoder de forma mais dinamica
+
+func NewDecoder(r io.Reader) *Decoder
+
+func NewDecoder(r io.Reader) *Decoder
+NewDecoder retorna um novo decodificador que lê de r.
+
+O decodificador introduz seu próprio buffer e pode ler dados de r além dos valores JSON solicitados.
+
+func (*Decoder) Buffered ¶
+adicionado em go1.1
+func (dec *Decoder) Buffered() io.Reader
+Buffered retorna um leitor dos dados restantes no buffer não lido, que pode conter zero ou mais bytes. Esses são os dados já consumidos da entrada io.Reader, mas ainda não lidos por uma chamada Decoder.Decode ou Decoder.Token. Podem conter bytes que não formam um JSON válido, pois ainda não foram validados de acordo com a gramática JSON. A quantidade exata de dados em buffer é um detalhe de implementação do Decoder e pode mudar ao longo do tempo.
+
+É responsabilidade do chamador concatenar este buffer com o restante do leitor de entrada para obter a sequência completa de bytes após o último valor JSON decodificado.
+
+O leitor é válido até a próxima chamada a `Decoder.Decode` ou `Decoder.Token`.
+
+func (*Decoder) Decode ¶
+func (dec *Decoder) Decode(v any) error
+Decode lê o próximo valor codificado em JSON de sua entrada e o armazena no valor apontado por `v`.
+
+Consulte a documentação de `Unmarshal` para obter detalhes sobre a conversão de JSON em um valor Go.
+
+

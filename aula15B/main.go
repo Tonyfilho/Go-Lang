@@ -13,15 +13,18 @@ type FullName struct {
 	Nome      string
 	SobreNome string
 }
-
+type Colors []string 
 type Pessoa struct {
 	NomeCompleto  FullName
 	Idade         int
 	Profissao     string
 	ContaBancaria float64
+	Cores Colors
+
 }
 
 func main() {
+	fmt.Println("Aula15B Criando Objeto para transformar para Json ")
 	/**Criando Objeto para transformar para Json*/
 	/** 1º Objeto anotação composta*/
 	tony := Pessoa{
@@ -32,6 +35,7 @@ func main() {
 		Idade:         40,
 		Profissao:     "Developer",
 		ContaBancaria: 1000,
+		Cores: []string {"Vermelho", "Azul"},
 	}
 
 	/** 2º Objeto anotação simples, tenho q por o 2º Struct FullName*/
@@ -43,6 +47,7 @@ func main() {
 		19,
 		"Developer",
 		1000,
+		[]string {"Branco","Verde"},
 	}
 
 	/**Criaremos as Funções Json.Marshal(), temos que ter 2 variaveis, Data e Err*/

@@ -31,4 +31,14 @@ Ou:
 func Dial(network, address string) (Conn, error)
 type Conn interface { [...] Write(b []byte) (n int, err error) [...] }
 
+Resumo
+1º Temos a Interface Write que tem o Metodo Write type Writer interface { Write(p []byte) (n int, err error) }
+2º temos uma função: func (f *File) Write(b []byte) (n int, err error) que implementa este metodo       da Interface Write
+3º Por fim temos uma Função que recebe dados pela Interface io.Write e retorna um Pondeiro      : func NewEncoder(w io.Writer) *Encoder
+A Grande questão é que esta Interface não é so usada Imprimir, é Implementada em Muita coisa em GO!
+Ex: É a Função de Conexão func DIAL que implementa a Interface Conn , mas a  interface Conn implementa o metodo WRITE:
+Função func Dial(network, address string) (Conn, error)
+O Seja TUDO que tem o METODO WRITE pode ser recebido como ARGUMENTO
+Ate uma conexão de REDE é passado como WRITE
+
 

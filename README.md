@@ -1085,3 +1085,164 @@ Go Playground:
 sort.Strings: https://play.golang.org/p/Rs1NVwmg7h
 sort.Ints: https://play.golang.org/p/I2_vsHujZa
 Aprenda Go explora as funcionalidades do pacote s
+
+#### Aula17B Usando a interface.Interface
+
+## Criando nosso Proprio Sort
+https://www.youtube.com/watch?v=0E-q22d3QD4&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=118
+
+O sort que eu quero não existe. Quero fazer o meu.
+# Para isso podemos usar o func Sort do package sort. Vamos precisar de um sort.Interface.
+## type Interface interface { Len() int; Less(i, j int) bool; Swap(i, j int) }
+Ou seja, se tivermos um tipo que tenha esses métodos, ao executar sort.Sort(x) as funções que vão rodar são as minhas, não as funções pré-prontas como no exercício anterior.
+E aí posso fazer do jeito que eu quiser.
+Exemplo:
+struct carros: nome, consumo, potencia
+slice []carros{carro1, carro2, carro3} (Sort ordena *slices!*)
+tipo ordenarPorPotencia
+tipo ordenarPorConsumo
+
+Go Playground: https://play.golang.org/p/KOIhAsE3OK
+
+#	1º FUNÇÃO SORT ordena DADOS e recebe como Paramentro a  interface.Interface func Sort(data Interface)
+#   2º A interface.Interface tem 3 metodos { Len() int; Less(i, j int) bool; Swap(i, j int) }
+#   3º Podemos extender  Automaticamente a FUNÇÃO SORT se implementarmos os Metodos assima. e 
+	* com isto podemos costumisar o que queremos, caso Ex: poderiamos receber um [] Slice de uma lista VIP, onde ordenariamos
+	* os melhores clientes 
+# 4º Temos que criar os TIPOS.
+#	5º Criamos os Metodos para os TIPOS , estes Metodos costumisados
+	* fazem com que estes TIPOS implemente AUTOMATICAMENTE a interface.Interface tem a FUNçÃO SORTE
+#	6º Como os TIPOS Implementam a inteface.Interface podemos usar a Função neles, e desta forma ordenamos de forma customisado
+	
+
+#### Aula18 BCrypt
+
+https://www.youtube.com/watch?v=4vCb7jmwkzM&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=120
+https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/16_aplicacao/bcrypt/main.go
+
+É uma maneira de encriptar senhas utilizando hashes.
+x/crypto/bcrypt
+GenerateFromPassword
+CompareHashAndPassword
+# Sem Go Playground! No terminal, dentro da pasta do seu projeto, execute:
+
+# Tem que criar o Modulo
+# 1. Inicialize o módulo na pasta atual
+go mod init aula18
+
+# 2. Agora instale o bcrypt
+go get golang.org/x/crypto/bcrypt
+
+# 3. Seu arquivo go.mod será criado/atualizado
+
+#### Aula19 Concorrencia Vs Paralelismo
+
+# Concorrência é quando abre uma padaria do lado da outra e as duas quebram :)
+Fun facts: 
+# 01 O primeiro CPU dual core "popular" veio em 2006
+Em 2007 o Google começou a criar a linguagem Go para utilizar essa vantagem
+# Go foi a primeira linguagem criada com multi-cores em mente C, C++, C#, Java, JavaScript, Python, etc., foram todas criadas antes de 2006
+Ou seja, Go tem uma abordagem única (fácil!) para este tópico
+# E qual a diferença entre concorrência e paralelismo?
+
+## Concorrencia com Goroutines & WaitGroups
+
+# O código abaixo é linear. Como fazer as duas funções rodarem concorrentemente?
+https://play.golang.org/p/XP-ZMeHUk4
+Goroutines!
+O que são goroutines? São "threads."
+O que são threads? [WP](https://pt.wikipedia.org/wiki/Thread_...)
+Na prática: go func.
+Exemplo: código termina antes da go func executar.
+Ou seja, precisamos de uma maneira pra "sincronizar" isso.
+Ah, mas então... não.
+Qualé então? sync.WaitGroup:
+Um WaitGroup serve para esperar que uma coleção de goroutines termine sua execução.
+func Add: "Quantas goroutines?"
+func Done: "Deu!"
+func Wait: "Espera todo mundo terminar."
+Ah, mas então... sim!
+Só pra ver: runtime.NumCPU() & runtime.NumGoroutine()
+
+Go Playground: https://play.golang.org/p/8iiqLX4sWc
+
+# hread (em português: fio de execução[1] ou encadeamento de execução) é uma forma como um processo/tarefa de um programa de computador é divido em duas ou mais tarefas que podem ser executadas concorrentemente ("simultâneo"). 
+
+## aparentemente vejo algo parecido com a PROMISES, pois precisamos esperar o fim da execução
+
+
+#### Aula19B Concorrência – 2. Goroutines & WaitGroups 
+# Continuação
+https://www.youtube.com/watch?v=4jXSU2jw3Ag&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=126
+
+Exemplo: código termina antes da go func executar.
+Ou seja, precisamos de uma maneira pra "sincronizar" isso.
+Ah, mas então... não.
+Qualé então? sync.WaitGroup:
+Um WaitGroup serve para esperar que uma coleção de goroutines termine sua execução.
+func Add: "Quantas goroutines?"
+func Done: "Deu!"
+func Wait: "Espera todo mundo terminar."
+Ah, mas então... sim!
+Só pra ver: runtime.NumCPU() & runtime.NumGoroutine()
+
+Go Playground: https://play.golang.org/p/8iiqLX4sWc
+
+# Como ja vimos o main() terminou antes da goroutine go Func01() e foi descartada e precisamos usar o WaitGroup  para controlar a execução
+
+
+#### Aula19D  Concorrência – 4. Na prática: Condição de corrida
+
+https://www.youtube.com/watch?v=XxG7qqJzDKk&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=128
+
+Aqui vamos replicar a race condition mencionada no artigo anterior.
+time.Sleep(time.Second) vs. runtime.Gosched()
+go help → go help build → go run -race main.go
+Como resolver? Mutex. 
+
+# Resulmo vais goroutines leram uma variavel compartilhada e não conseguiram salvar na variavel
+
+
+#### Aula19E  Concorrência –  5. Mutex
+https://www.youtube.com/watch?v=egd4WHJMwC0&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=129
+https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/18_concorrencia/06_mutex/main.go
+# https://pkg.go.dev/sync#Mutex
+
+
+Agora vamos resolver a race condition do programa anterior utilizando mutex.
+# Mutex é mutual exclusion, exclusão mútua.
+# Utilizando mutex somente uma thread poderá utilizar a variável contador de cada vez, e as outras deve aguardar sua vez "na fila."
+Na prática:
+type Mutex
+func (m *Mutex) Lock()
+func (m *Mutex) Unlock()
+RWMutex
+
+# Um Mutex é um bloqueio de exclusão mútua. O valor zero para um Mutex representa um mutex desbloqueado.
+
+Um Mutex não deve ser copiado após o primeiro uso.
+
+Na terminologia do modelo de memória do Go, a n-ésima chamada a `Mutex.Unlock` "sincroniza antes" da m-ésima chamada a `Mutex.Lock` para qualquer n < m. Uma chamada bem-sucedida a `Mutex.TryLock` é equivalente a uma chamada a `Lock`. Uma chamada malsucedida a `TryLock` não estabelece nenhuma relação de "sincroniza antes".
+
+
+
+
+
+
+#### Aula19F Atomic
+https://www.youtube.com/watch?v=iFlQ2yAYcp4&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=130
+
+https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/18_concorrencia/07_atomic/main.go
+
+# https://pkg.go.dev/sync/atomic
+Agora vamos fazer a mesma coisa, mas com atomic ao invés de mutex.
+atomic.AddInt64
+atomic.LoadInt64
+
+# O pacote `atomic` fornece primitivas de memória atômica de baixo nível úteis para implementar algoritmos de sincronização.
+
+Essas funções exigem muito cuidado para serem usadas corretamente. Exceto para aplicações especiais de baixo nível, a sincronização é melhor feita com canais ou com os recursos do pacote `sync`. Compartilhe memória comunicando-se; não comunique-se compartilhando memória.
+
+A operação de troca (swap), implementada pelas funções `SwapT`, é o equivalente atômico de:
+
+

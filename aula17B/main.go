@@ -70,4 +70,17 @@ func main() {
 	sort.Sort(ordenarPorLucro(carros))
 	fmt.Println("Imprimindo o Objeto Modificando por Lucro para a Bomba de Gasolina: \n", carros)
 
+	/**Resulmo:
+	1º FUNÇÃO SORT ordena DADOS e recebe como Paramentro a  interface.Interface func Sort(data Interface)
+	2º A interface.Interface tem 3 metodos { Len() int; Less(i, j int) bool; Swap(i, j int) }
+	3º Podemos extender  Automaticamente a FUNÇÃO SORT se implementarmos os Metodos assima. e 
+	* com isto podemos costumisar o que queremos, caso Ex: poderiamos receber um [] Slice de uma lista VIP, onde ordenariamos
+	* os melhores clientes 
+	4º Temos que criar os TIPOS
+	5º Criamos os Metodos para os TIPOS , estes Metodos costumisados
+	* fazem com que estes TIPOS implemente AUTOMATICAMENTE a interface.Interface tem a FUNçÃO SORTE
+	6º Como os TIPOS Implementam a inteface.Interface podemos usar a Função neles, e desta forma ordenamos de forma customisado
+	
+	*/
+
 }

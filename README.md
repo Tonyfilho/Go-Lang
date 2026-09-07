@@ -1246,3 +1246,52 @@ Essas funções exigem muito cuidado para serem usadas corretamente. Exceto para
 A operação de troca (swap), implementada pelas funções `SwapT`, é o equivalente atômico de:
 
 
+##### Aula20 Package Organizations  8. Pacotes
+## OBS tem q dar o "go mod init"
+
+https://www.youtube.com/watch?v=SO-RFPSqD3c&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=138
+https://rakyll.org/style-packages/ 
+
+https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/19_seu-ambiente-de-desenvolvimento/pacotes
+
+
+Opção 1: uma pasta, vários arquivos.
+package declaration em todos os arquivos
+package scope: um elemento de um arquivo é acessível de todos os arquivos
+imports tem file scope
+Opção 2: separando por packages.
+pastas diferentes
+requer imports
+para usar: package.Função()
+Exportado vs. não-exportado, ou seja, visível vs. não-visível
+Em Go não utilizamos os termos "público" e "privado" como em outras linguagens
+É somente questão de capitalização
+Com maiúscula: exportado, visível fora do package
+Com minúscula: não exportado, não utilizável fora do package
+
+#### Aula21  Canais – 1. Entendendo canais
+
+https://www.youtube.com/watch?v=jF0xuhnPkDg&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=146
+
+# Canais são o Jeito Certo® de fazer sincronização e código concorrente.
+# Eles nos permitem trasmitir valores entre goroutines.
+# Servem pra coordenar, sincronizar, orquestrar, e buffering.
+Na prática:
+make(chan type, b)
+Canais bloqueiam:
+Eles são como corredores em uma corrida de revezamento
+Eles tem que "passar o bastão" de maneira sincronizada
+Se um corredor tentar passar o bastão pro próximo, mas o próximo corredor não estiver lá...
+Ou se um corredor ficar esperando receber o bastão, mas ninguem entregar...
+...não dá certo.
+Exemplos:
+Poe um valor num canal e faz um print. Block.
+Código acima com goroutine.
+# Ou com buffer. Via de regra: má idéia; é legal em certas situações, mas em geral é melhor sempre passar o bastão de maneira sincronizada.
+Interessante: ref/spec → types
+Código: 
+Block: https://play.golang.org/p/dClS7vQlYE (não roda!)
+Go routine: https://play.golang.org/p/ZbNCwUuiPi
+Buffer: https://play.golang.org/p/32vYvCR7qn
+Buffer block: https://play.golang.org/p/smeW6vigAT
+Mais buffer: https://play.golang.org/p/Pe2pcboGiA

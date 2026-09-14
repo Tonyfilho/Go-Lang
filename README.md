@@ -1295,3 +1295,95 @@ Go routine: https://play.golang.org/p/ZbNCwUuiPi
 Buffer: https://play.golang.org/p/32vYvCR7qn
 Buffer block: https://play.golang.org/p/smeW6vigAT
 Mais buffer: https://play.golang.org/p/Pe2pcboGiA
+
+
+#### Aula21C Canais Assignment/conversion
+
+# Assignment/conversion: 
+de geral para específico
+de específico para geral não
+Exemplos:
+# geral pra específico: https://play.golang.org/p/H1uk4YGMBB
+
+# específico pra específico: https://play.golang.org/p/8JkOnEi7-a 
+// cs = cr // cannot use cr (variable of type <-chan int) as chan<- int value in assignment
+
+# específico pra geral: https://play.golang.org/p/4sOKuQRHq7
+// fmt.Printf("c\t%T\n", (chan int)(cs))
+// fmt.Printf("c\t%T\n", (chan int)(cr))
+
+# atribuição tipos != (Diferentes) https://play.golang.org/p/bG7H6l03VQ 
+fmt.Println("teremos error de tipagem ")
+
+Em funcs podemos especificar:
+receive channel
+Parâmetro receive channel: (c ←chan int)
+No scope dessa função, esse canal só recebe
+Não podemos fechar um receive channel
+send channel 
+Parâmetro send channel: (c chan← int)
+No scope dessa função, esse canal só envia
+Podemos fechar um send channel
+Exemplo: passando informação de uma função para outra.
+Código: https://play.golang.org/p/TlcSm8bHkW (replay)
+
+
+#### Aula21D  Canais – 3. Range e close
+
+Range:
+gofunc com for loop com send e close(chan)
+recebe com range chan
+
+Código: https://play.golang.org/p/_g5IEjSkh1
+
+# O problema está na execução das goroutines
+Seu código não imprime os valores porque as goroutines não têm tempo para executar antes do programa terminar.
+
+# O que são goroutines?
+São "threads leves" que executam em paralelo
+
+Quando main termina, todas as goroutines são mortas
+
+## Linha do Tempo → Sem WaitGroup 
+## Tempo →
+# main: inicia → cria canal → inicia goroutine1 → inicia goroutine2 → FIM
+goroutine1: inicia → envia 0 → envia 1 → ... (não termina)
+goroutine2: inicia → espera dados do canal → ... (não termina)
+
+## Linha do Tempo → Com WaitGroup 
+## Tempo →
+# main: inicia → cria canal → inicia goroutine1 → inicia goroutine2 → espera (WAIT) 
+goroutine1: inicia → envia 0 → envia 1 → ... → close → done!
+goroutine2: inicia → recebe 0 → recebe 1 → ... → range termina → done!
+                                                                      
+main: wait desbloqueia → FIM (só depois que ambas terminaram)
+
+
+#### Aula21E   Canais – 4. Select 
+https://www.youtube.com/watch?v=dp8s5jAc7h0&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=149
+
+# Select é como switch, só que pra canais, e não é sequencial.
+
+"A select blocks until one of its cases can run, then it executes that case. It chooses one at random if multiple are ready." — https://tour.golang.org/concurrency/5
+Na prática:
+# Exemplo 1:
+Duas go funcs enviando X/2 numeros cada uma pra um canal
+For loop X valores, select case ←x
+Go Playground:
+1. https://play.golang.org/p/xC3e1wBxgv
+
+
+# Exemplo 2:
+Func 1 recebe X valores de canal, depois manda qualquer coisa pra chan quit
+Func 2 for infinito, select: case envia pra canal, case recebe de quit
+Go Playground:
+2. https://play.golang.org/p/_NZqhBXN-v
+
+
+# Exemplo 3:
+Chans par, ímpar, quit
+Func send manda números pares pra um canal, ímpares pra outro, e fecha/quit
+Func receive é um select entre os três canais, encerra no quit
+Problema!
+Go Playground:
+3. https://play.golang.org/p/rK8QwsBo0H

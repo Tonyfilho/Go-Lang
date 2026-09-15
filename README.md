@@ -1,29 +1,33 @@
 #### Go-Lang
+
 Curso de Go
-## Guias de pesquisa 
+
+## Guias de pesquisa
+
 # golang.org/ref/spec#For_statements
+
 # Effective Go
 
 ## Operador NIL em GO
+
 # Em resumo: nil em Go é um valor válido que indica "não aponta para nada", enquanto undefined em JS é a ausência de valor propriamente dita. São conceitos diferentes com propósitos diferentes!
 
 Go (nil apenas para):
-Ponteiros (*T)
+Ponteiros (\*T)
 Slices ([]T)
 Maps (map[T]T)
 Channels (chan T)
 Functions
 Interfaces
 
-
 #### aula 01
+
 Aula01
 
 # criando uma projeto em GO
 
 \*\* go run + nome do projeto
 rodando o projeto go run aula01.go
-
 
 # 01 Operador curto de declaração, populamente chamada de Marmota
 
@@ -44,13 +48,15 @@ x is of type int
 y is of type string
 
 # 02 declaração de variavel Global com a palavra VAR
+
 Para uso de variavel Gobal temos que usar a palavra Var
 Variaveis globais pode startar como nulas, mas so podem receber valores depois dentro de um bloco {..}
 
 # 03 Opertadores e Operando e Expressões, Statement
+
 Opertadores e Operando, Iqual as outras liguagens.
 
-Expressões são tudo que produz uma resultado, ex: var local = 10 + 10, o resultado será  a expressão.
+Expressões são tudo que produz uma resultado, ex: var local = 10 + 10, o resultado será a expressão.
 
 Statement, são linha de codigos, ou chamada de funções ex: fmt.Printf("localVariable is of type %T\n", localVariable)
 
@@ -59,6 +65,7 @@ OBS: Um statemente é formado de 1 ou mais expressoes, ou seja conjunto
 # chaves (), Parenteses {} e cochetes []
 
 # Tipos de dados compostos: são tipos compostos de tipos primitivos, e criados pelo usuário
+
 slice, array, struct, map
 
 # Atribuição de valores a variaveis
@@ -72,8 +79,6 @@ dizendo que uma variavel do tipo string vari ter um ZERO é o nome deste momento
 -poiters, functions, interfaces, slicesm channels e maps: nil
 
 inicialização é o 1º valor q coloco em uma variavel
-
-
 
 #### aula 02
 
@@ -133,17 +138,15 @@ localTipo = 5
 fmt.Printf("%v %T\n", localTipo, localTipo)
 
 # 04 conversão de Types, é o mesmo que CASTING de outras liguagens
+
 Conversão de tipos é o que soa.
 Em Go não se diz casting, se diz conversion.
 a = int(b)
 ref/spec#Conversions
 
-OBS eIqual := localInt == localTipo  Erro no compilador, não permite retornar um boolean em GO
+OBS eIqual := localInt == localTipo Erro no compilador, não permite retornar um boolean em GO
 
-
-#### Aula03 
-
-
+#### Aula03
 
 # 01 como funcionam os computadores
 
@@ -153,6 +156,7 @@ ASCII: https://en.wikipedia.org/wiki/ASCII
 Filme: Alan Turing, The Immitation Game.
 
 # 02 Falaremos sobre boolean
+
 Agora vamos explorar os tipos de maneira mais detalhada. golang.org/ref/spec. A começar pelo bool.
 O tipo bool é um tipo binário, que só pode conter um dos dois valores: true e false. (Verdadeiro ou falso, sim ou não, zero ou um, etc.)
 Booleans são fundamentais nas tomadas de decisões em lógica condicional, declarações switch, declarações if, fluxo de controle, etc.
@@ -162,28 +166,28 @@ Atribuindo um valor
 Bool como resultado de operadores relacionais
 Go Playground: https://play.golang.org/p/7joj615nZw
 
-OBS: são uados operadores relacionais == ; <= ; >= ;  < ;  > ;
+OBS: são uados operadores relacionais == ; <= ; >= ; < ; > ;
 Sempre que você ver operadores relacionais, o resultado da expressão será um valor booleano.
 
-
 # 03 Inteiro vs Frações
+
 int vs. float: Números inteiros vs. números com frações.
 golang.org/ref/spec → numeric types
 
-*****Integers:
+**\***Integers:
 Números inteiros
 int & uint → “implementation-specific sizes”
 Todos os tipos numéricos são distintos, exceto:
 byte = uint8
 rune = int32 (UTF8)
-        (O código fonte da linguagem Go é sempre em UTF-8).
+(O código fonte da linguagem Go é sempre em UTF-8).
 Tipos são únicos
 Go é uma linguagem estática
 int e int32 não são a mesma coisa OBS: int fica no automatico, caso o processador precise ele muda para 32 ou 64.
 Para "misturá-los" é necessário conversão
 Regra geral: use somente int
 
-******Floating point:
+**\*\***Floating point:
 Números racionais ou reais
 Regra geral: use somente float64, é automatico, caso somente coloque float, ele vai usar o 64
 Na prática:
@@ -198,13 +202,11 @@ GORUNTIME
 https://play.golang.org/p/1vp5DImIMM
 
 # 04 Overflow
+
 Um uint16, por exemplo, vai de 0 a 65535.
 Que acontece se a gente tentar usar 65536?
 Ou se a gente estiver em 65535 e tentar adicionar mais 1?
 Playground: https://play.golang.org/p/t7Z4m127F2t
-
-
-
 
 #### aula 04
 
@@ -221,7 +223,6 @@ Go Playground: https://play.golang.org/p/dt2x1ies5b & https://play.golang.org/p/
 https://blog.golang.org/strings
 
 OBS: cada item é um byte
-
 
 # 02 Constantes
 
@@ -241,22 +242,21 @@ const ( x = y )
 golang.org/ref/spec
 Numa declaração de constantes, o identificador iota representa números sequenciais.
 Na prática.
-iota, iota + 1, a = iota b c, reinicia em cada const, _
+iota, iota + 1, a = iota b c, reinicia em cada const, \_
 Go Playground: https://play.golang.org/p/eSrwoQjuYR
 
 # 04 Deslocamento de bits é quando deslocamos digitos binários para a esquerda ou direita.
+
 Deslocamento de bits é quando deslocamos digitos binários para a esquerda ou direita.
 https://play.golang.org/p/7MOnbhx4R4
-  / bit-hacking-with-go  
+/ bit-hacking-with-go  
 Fim da sessão. Massa!
-
 
 #### aula 05
 
 ## 01 Fluxos de Controle
 
-####  Fluxos de Controle
-
+#### Fluxos de Controle
 
 Computadores lêem programas de uma certa maneira, do mesmo jeito que nós lemos livros, por exemplo, de uma certa maneira.
 Quando nós ocidentais lemos livros, lemos da frente pra trás, da esquerda pra direito, de cima pra baixo.
@@ -293,21 +293,24 @@ if, else
 if, else if, else
 if, else if, else if, ..., else
 
-
 # 01 Loops
+
 OBS: falando do ponto e virgula do FOR, em Go o compilador coloca automaticamente um ";" no fim de cada instrução ou statement o compilador coloca automaticamente para nós
 For
 Inicialização, condição, pós
 Ponto e vírgula?
 gobyexample.com
+
 # OBS: Não existe while!
 
 # 02 Fluxo de Controle – 3. Loops: nested loop (repetição hierárquica)
+
 For
 Repetição hierárquica
 Exemplos: relógio, calendário
 
 # 03 For: inicialização, condição, pós
+
 For: inicialização, condição, pós
 For: condição ("while")
 For: ...ever? (http servers)
@@ -316,22 +319,25 @@ golang.org/ref/spec#For_statements, Effective Go
 (Range vem mais pra frente.)
 
 # 04 For Break e Continue
+
 Operação módulo: %
 For: break
 For: continue
 Go Playground: https://play.golang.org/p/gpKMP1wAEM & https://play.golang.org/p/8erMGEbZQix
 
 # 05 Desafio surpresa!
+
 Format printing:
-Decimal       %d
-Hexadecimal   %#x
-Unicode       %#U
-Tab           \t
-Linha nova    \n
+Decimal %d
+Hexadecimal %#x
+Unicode %#U
+Tab \t
+Linha nova \n
 Faça um loop dos números 33 a 122, e utilize format printing para demonstrá-los como texto/string.
 Solução: https://play.golang.org/p/REm2WHyzzz
 
 # 06 Declaração IF
+
 If: bool
 If: o operador não → "!"
 If: declaração de inicialização
@@ -342,11 +348,10 @@ If, else if, else.
 If, else if, else if, ..., else.
 Go Playground: https://play.golang.org/p/18VrRX2pec
 
-
 # 07 Declaração Switch
 
 Switch:
-pode avaliar uma expressão 
+pode avaliar uma expressão
 switch statement == case (value)
 default switch statement == true (bool)
 Obs não há fall-through por padrão temos que por a palavra reservada Fallthrough.
@@ -357,7 +362,7 @@ cases compostos
 # 07 Declaração Switch
 
 Switch:
-pode avaliar uma expressão 
+pode avaliar uma expressão
 switch statement == case (value)
 default switch statement == true (bool)
 Obs não há fall-through por padrão temos que por a palavra reservada Fallthrough.
@@ -365,14 +370,12 @@ criando fall-through
 default
 cases compostos
 
-OBS: POdemos por a variavel do switch como Generica, usadoa palavra reservada Interface, como isto ela vai filtrar de a cordo com o Tipo. 
-
-
-
+OBS: POdemos por a variavel do switch como Generica, usadoa palavra reservada Interface, como isto ela vai filtrar de a cordo com o Tipo.
 
 #### Aula06 Operadores logicos condicionais e Agrupamentos de dados
 
 # 01 Operadores Lógicos
+
 &&
 ||
 !
@@ -384,17 +387,25 @@ true || true
 true || false
 !true
 
+#### Aula06B Tabela de Agrupamentos
 
-#### Aula06B    Tabela de Agrupamentos
 # Tabela Comparativa Rápida
-# Tipo	    Tamanho	     Mutável	Por Valor/Ref	Nil possível?	Mais usado
-# Array	    Fixo	      Sim	        Valor	         ❌	         Raro
-# Slice	    Dinâmico	  Sim	        Referência	     ✅	         MUITO
-# Map	    Dinâmico	  Sim	        Referência	     ✅	         MUITO
-# Struct    Fixo	      Sim	        Valor	         ❌         * MUITO
-# Ponteiro	Fixo	      Sim	        Referência	     ✅	         Médio
-# Interface	Dinâmico	  N/A	        Referência	     ✅	         MUITO
-*Struct pode ser nil se for ponteiro para struct
+
+# Tipo Tamanho Mutável Por Valor/Ref Nil possível? Mais usado
+
+# Array Fixo Sim Valor ❌ Raro
+
+# Slice Dinâmico Sim Referência ✅ MUITO
+
+# Map Dinâmico Sim Referência ✅ MUITO
+
+# Struct Fixo Sim Valor ❌ \* MUITO
+
+# Ponteiro Fixo Sim Referência ✅ Médio
+
+# Interface Dinâmico N/A Referência ✅ MUITO
+
+\*Struct pode ser nil se for ponteiro para struct
 
 # 02 Agrupamentos de Dados
 
@@ -409,7 +420,8 @@ Effective Go: Arrays são úteis para [umas coisas que a gente não vai fazer nu
 Go Playground: https://play.golang.org/p/Fv-sDF-ryZ
 
 # 03 Slices
-O que são tipos de dados compostos? 
+
+O que são tipos de dados compostos?
 Wikipedia: Composite_data_type
 Effective Go: Composite literals
 ref/spec: Composite literals
@@ -418,7 +430,8 @@ Criando uma slice: literal composta → x := []type{values}
 Go Playground: https://play.golang.org/p/W7Cxm8NPZC
 
 # 03B Dividindo um SLICE, fatiando ou deletando de uma fatia
-x[:] // SEM RANGE, VEM TODOS OS ITENS é o default, 
+
+x[:] // SEM RANGE, VEM TODOS OS ITENS é o default,
 x[a:], x[:b], x[a:b]
 "a" é incluso;
 "b" não é.
@@ -440,7 +453,7 @@ x = append(slice, slice...)
 Todd: unfurl → desdobrar, desenrolar
 Nome oficial: enumeration
 Go Playground: https://play.golang.org/p/RpkDCTumpT
-... o operador  unFurl é o mesmo que rest ou destruction
+... o operador unFurl é o mesmo que rest ou destruction
 
 # 03D Slice Make
 
@@ -458,7 +471,6 @@ pkg/builtin/#append: "If it has sufficient capacity, the destination is resliced
 Effective Go.
 Go Playground: https://play.golang.org/p/e8GWzyEEL8
 
-
 # 03E Slice Multi-Dimentional
 
 Slices multi-dimensionais são slices que contem slices.
@@ -468,6 +480,7 @@ Go Playground: https://play.golang.org/p/vKyHiG1GtM
 Só pra sacanear: https://play.golang.org/p/ZSU_8eJ9Yp
 
 # 03F Slice a surpresa do array subjacente
+
 OBS: Modificação da referencia de memoria
 Isso tudo aqui a gente já viu:
 Toda slice tem um array subjacente.
@@ -481,22 +494,25 @@ O que nos dá um resultado inesperado.
 Ou seja, bom saber de antemão pra não ter que aprender na marra.
 Go Playground: https://play.golang.org/p/BBJLuIjU_i
 
-
-
-
-
 #### Maps
 
 ## comparações
 
 ## 3. Comparação com outras linguagens
-# Linguagem	Estrutura Chave-Valor	Set (Valores Únicos)
-# Go	map[K]V	Não tem nativo (simula com map[K]struct{})
-# Python	dict	set
-# JavaScript	Object / Map	Set
-# Java	HashMap<K,V>	HashSet<T>
-# C#	Dictionary<TKey,TValue>	HashSet<T>
-# Rust	HashMap<K,V>	HashSet<T>
+
+# Linguagem Estrutura Chave-Valor Set (Valores Únicos)
+
+# Go map[K]V Não tem nativo (simula com map[K]struct{})
+
+# Python dict set
+
+# JavaScript Object / Map Set
+
+# Java HashMap<K,V> HashSet<T>
+
+# C# Dictionary<TKey,TValue> HashSet<T>
+
+# Rust HashMap<K,V> HashSet<T>
 
 # 01 Maps Introdução
 
@@ -514,8 +530,7 @@ Para adicionar um item: m[v] = value
 Maps não tem ordem.
 Go Playground: https://play.golang.org/p/JXDdJan8Ev
 
-
-# 02 Maps  range & deletando
+# 02 Maps range & deletando
 
 Range: for k, v := range map { }
 Reiterando: maps não tem ordem e um range usará uma ordem aleatória.
@@ -524,11 +539,12 @@ delete(map, key)
 Deletar uma key não-existente não retorna erros!
 Go Playground: https://play.golang.org/p/0uuIicU3Zz
 
-
 #### Struct
+
 # https://go.dev/ref/spec
 
 # 01 Struct inicio https://go.dev/ref/spec#Struct_types
+
 Struct é um tipo de dados composto que nos permite armazenar valores de tipos diferentes.
 Seu nome vem de "structure," ou estrutura.
 Declaração: type x struct { y: z }
@@ -538,7 +554,7 @@ Go Playground: https://play.golang.org/p/5i0DqxuBp1
 
 OBs: O Struct é o Objeto do Js e TypeScript
 
-# 02 Structs 
+# 02 Structs
 
 É importante se familiarizar com a documentação da linguagem Go.
 Neste vídeo vamos ver um pouco sobre o que a documentação diz sobre structs.
@@ -550,6 +566,7 @@ x, y int
 anonymous fields
 promoted fields
 Go Playground: https://play.golang.org/p/z9UQej4IQT
+
 ## OBS: O acesso aos campos é iqual ao Java Ex: pessoa.idade
 
 # 03 Structs Anonimos
@@ -558,34 +575,37 @@ São structs sem identificadores.
 x := struct { name type }{ name: value }
 Go Playground: https://play.golang.org/p/xyhNnSCu1f
 
-
-
 #### Funções
 
-# 01  Funções  https://go.dev/ref/spec#Function_types
+# 01 Funções https://go.dev/ref/spec#Function_types
+
 Qual a utilidade de funções?
 Abstrair funcionalidade
 Reutilização de código
+
 # Temos q ter esta extrutura, func (receiver) identifier(parameters) (returns) { code }
+
 # É algo assim: func (receiver) NomeDaFução(QualquerCoisaOuTipoDeDado) (Tipo de dado Retornado Ex: String, ou uma soma, ou uma outra Função, lembrando q podemos ter mais de um retorno ) { É o que vc vai programar}
+
 A diferença entre parâmetros e argumentos:
 Funções são definidas com parâmetros
 Funções são chamadas com argumentos
 Parâmetro pode ser ...variádico tem que ser o ultimo paramentro
 Pass by reference, pass by copy, ... não.
+
 # Obs: Tudo em Go é pass by value. Ou seja é o temos dentro da Variavel e não a Referencia de memoria criada
+
 Exemplos:
-Função básica. 
+Função básica.
 Go Playground: https://play.golang.org/p/FebJblBenP
-Função que aceita um argumento. 
-Go Playground: 
-        https://play.golang.org/p/CE6Ij3U4QB
-Função com retorno. 
+Função que aceita um argumento.
+Go Playground:
+https://play.golang.org/p/CE6Ij3U4QB
+Função com retorno.
 Go Playground: https://play.golang.org/p/gKxwYe6btP
 Função com múltiplos retornos e parâmetro variádico.
 Go Playground: https://play.golang.org/p/OcQ1wXwM2c
 Mais um: https://play.golang.org/p/8wc2TA9xH_
-
 
 # 02 Funções Desenrolando (enumerando) uma slice
 
@@ -595,15 +615,16 @@ Desenrolando uma slice de ints com como argumento para a função "soma" anterio
 Go Playground: https://play.golang.org/p/k8O3__8UDa
 Pode-se passar zero ou mais valores
 Go Playground: https://play.golang.org/p/C238I9n7Vs
-O parâmetro variádico deve ser o parâmetro final → ref/spec#Passing_arguments_to_..._parameters
+O parâmetro variádico deve ser o parâmetro final → ref/spec#Passing*arguments_to*..._parameters
 Go Playground: https://play.golang.org/p/8wc2TA9xH_
 Não roda: https://play.golang.org/p/2qTAnLWfgB
-
 
 # 03 Funções Defer siguinifica Postergar ou Adiar
 
 Funções são ótimas pois tornam nosso código modular. Podemos alterar partes do nosso programa sem afetar o resto!
+
 # Obs: Uma declaração DEFER chama uma função cuja execução ocorrerá no momento em que a função da qual ela faz parte finalizar.
+
 Essa finalização pode ocorrer devido a um return, ao fim do code block da função, ou no caso de pânico em uma goroutine correspondente.
 "Deixa pra última hora!", cria assincronismo
 ref/spec
@@ -611,9 +632,8 @@ Sempre usamos para fechar um arquivo após abri-lo.
 Ex: Abrir e fecha conexão de rede.
 Go Playground: https://play.golang.org/p/sFj8arw0E_
 
-
-
 #### Aula10 Funções
+
 # Obs: como temos mais de 1 File e o package é o mesmo temos que adcionar todos eles na execução Ex: go run main.go pessoa.go
 
 # 01 Funções Inicio
@@ -625,24 +645,25 @@ Utilização: valor.método()
 Exemplo: o tipo "pessoa" pode ter um método oibomdia()
 Go Playground: https://play.golang.org/p/tQtoqUBpY5
 
-
 #### Aula10B Funções, Interfaces & polimorfismo
 
 # 01 Polimorfismo em Go
 
 # Declaração: keyword identifier type → type x interface
+
 Em Go, valores podem ter mais que um tipo.
 Uma interface permite que um valor tenha mais que um tipo.
+
 ## Em Go um Interface é um conjunto de Metodos, e como se fosse um Ovo , quem herdar implementa o tipo de ovo, Ex: Ovo de Avestruz, de Galinha, de Cordona etc.. cada um em tamanhos diferentes, mas todos tem clara e gema.
 
 Após declarar a interface, deve-se definir os métodos necessários para implementar essa interface.
 
 ## OBS: Em Go, todos os Tipos Criados (type) implementam automaticamente a Interface{} VAZIA.
+
 Se um tipo possuir todos os métodos necessários (que, no caso da interface{}, pode ser nenhum) então esse tipo implicitamente implementa a interface.
 Esse tipo será o seu tipo e também o tipo da interface.
 
 ## OBS: Em Go não preciso implementar, caso seja contruido os mesmo Metodo que a Interface Ovo tem, Automaticamente fica implementado.
-
 
 Exemplos:
 Os tipos profissão1 e profissão2 contem o tipo pessoa
@@ -650,30 +671,32 @@ Cada um tem seu método oibomdia()*, e podem dar oi utilizando *pessoa.oibomdia(
 Implementam a interface gente
 Ambos podem acessar o função serhumano() que chama o método oibomdia() de cada gente
 Tambem podemos no método serhumano() tomar ações diferentes dependendo do tipo:
-        switch pessoa.(type) { case profissão1: fmt.Println(h.(profissão1).valorquesóexisteemprofissão1) [...] }* 
+switch pessoa.(type) { case profissão1: fmt.Println(h.(profissão1).valorquesóexisteemprofissão1) [...] }\*
 Go Playground pré-pronto: https://play.golang.org/p/VLbo_1uE-U
-    https://play.golang.org/p/zGKr7cvTPF
-
+https://play.golang.org/p/zGKr7cvTPF
 
 ## OBS: Implementação Automatica
-A Interface q por sua vez está dentro do  Metodo SerHumano(g gente) e temos 2 STRUCTs que usam o mesmo NOME do Metodo que temos que implementar da Interface
-, basta passar o valor que temos na Interface Gente. Observe que: Não tenho ftm.print() sendo invocado pelo metodo serHumando(g gente), mesmo assim conseguimos imprimir, ou seja: 
-Em Go não precisamos IMPLEMENTAR as Interfaces, elas são automaticamente Implementadas, basta usar o mesmo nome de Metodo. Ex:Não precisei invocar oiBomDIa(), somente  passei a variavel localArquiteto.
+
+A Interface q por sua vez está dentro do Metodo SerHumano(g gente) e temos 2 STRUCTs que usam o mesmo NOME do Metodo que temos que implementar da Interface
+, basta passar o valor que temos na Interface Gente. Observe que: Não tenho ftm.print() sendo invocado pelo metodo serHumando(g gente), mesmo assim conseguimos imprimir, ou seja:
+Em Go não precisamos IMPLEMENTAR as Interfaces, elas são automaticamente Implementadas, basta usar o mesmo nome de Metodo. Ex:Não precisei invocar oiBomDIa(), somente passei a variavel localArquiteto.
 
 # Temos TIPOS diferentes (Ou seja classes que usam a mesma interface)
 
-
 #### Aula10C Interfaces Auto Implementáveis E do Switch Case de TIPOs
+
 # Obs: como temos mais de 1 File e o package é o mesmo temos que adcionar todos eles na execução Ex: go run main.go pessoa.go
 
-## Uso da mesma interface em TIPOS diferentes e Auto Implenents 
+## Uso da mesma interface em TIPOS diferentes e Auto Implenents
+
 # em Go um interface Auto Implementa, bastando que tem for usar ter o mesmo nome de seus Metodo(s).
+
 Neste exemplo abaixo veremos que a mesma Interface calcula um circulo e um retangulo, é a aplicação do S do Solid
-https://gobyexample.com/interfaces  
+https://gobyexample.com/interfaces
 
 https://play.golang.org/p/zGKr7cvTPF
-Go Playground ao vivo: 
-    https://play.golang.org/p/njiKbTT20Cr
+Go Playground ao vivo:
+https://play.golang.org/p/njiKbTT20Cr
 Onde se utiliza?
 Área de formas geométricas (gobyexample.com)
 Sort
@@ -681,19 +704,18 @@ DB
 Writer interface: arquivos locais, http request/response
 Se isso estiver complicado, não se desespere. É foda mesmo. Com tempo e prática a fluência vem.
 
-
 # Obs: ao uso do ... o que chamo de Destruction ou Rest
+
 type arquiteto struct {
-	pessoa           // desta forma tenho acesso ao modo inteligente de Rest ... ou Destruction ... bastando passar variavel.nome
-	tipoDeConstrucao string
+pessoa // desta forma tenho acesso ao modo inteligente de Rest ... ou Destruction ... bastando passar variavel.nome
+tipoDeConstrucao string
 }
 
 type dentista struct {
-	pessoa  pessoa // desta forma o modo inteligente do ... Rest ou Destructions não funciona, tenho q fazer variavel.pessoa.nome
-	denteExtraidos int
-	salarios  float64
+pessoa pessoa // desta forma o modo inteligente do ... Rest ou Destructions não funciona, tenho q fazer variavel.pessoa.nome
+denteExtraidos int
+salarios float64
 }
-
 
 #### Aula11 Funções Anônimas
 
@@ -717,8 +739,7 @@ f()
 Go Playground: https://play.golang.org/p/cPxhPUbfLy
 
 Podemo usar uma função como se fosse uma variavel, Ou seja estou atribuido uma Varivel um valor
-após a execução e invocaremos como uma função nomal 
-
+após a execução e invocaremos como uma função nomal
 
 #### Aula11B Func Retorno Retornando uma função ou Recursividade
 
@@ -729,15 +750,16 @@ Exemplo: func f() func() int { [...]; return func() int{ return [int] } }
 Go Playground: https://play.golang.org/p/zPjoWNrCJF
 
 # OBS: Função recursiva
+
 1º func é para criar uma função Ex: retornaumafuncao()
 2º func é para criar a tipagem Ex: func(int) int, neste caso recebe um int e retorna um int
 3º func é o retorno da função que retorna outra função
-1º retorno é o retorno da função criada 
+1º retorno é o retorno da função criada
 2º retorno é o retorno da função retornada
 func retornaumafuncao() func(int) int {
-	return func(i int) int {
-		return i * 10
-	}
+return func(i int) int {
+return i \* 10
+}
 }
 
 #### Aula12 Callbacks, são funções que recebe um Argumento outra Função muito comum em JS
@@ -750,7 +772,7 @@ Go Playground:
 Desafio: Crie uma função no programa acima que utilize somente os números ímpares.
 
 t := somentePares(soma, []int{50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60}...)
-	fmt.Println(t)
+fmt.Println(t)
 
 ## OBS
 
@@ -769,11 +791,15 @@ São os valores reais que você passa para a função quando a chama
 São os dados concretos que preenchem os parâmetros
 
 #### Aula12B Closure
+
 # https://www.youtube.com/watch?v=mOM0qTB5ppU&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=96
 
 Muito parecido com Callback, sem receber a função com argumento mas retorna valores internos do escopo.
+
 # Closure é cercar ou capturar um scope para que possamos utilizá-lo em outro contexto. Já vimos:
+
 ## Closures é quando capturamos um determinado ESCOPO e usamos este valor para algo
+
 Package-level scope
 Function-level scope
 Code-block-in-code-block scope
@@ -785,24 +811,26 @@ Closures nos permitem salvar dados entre function calls e ao mesmo tempo isolar 
 Go Playground: https://play.golang.org/p/AdFciYwI2Z
 
 # OBS: Para cada invocação é somando o valor de X, nas funções Callback o retorno fica de fora do ESCOPO da função interna, aqui o retorno fica DENTRO do Escopo, com isto cada invocação somará a invocação anterior neste caso .
-Ex: x++  return x
-O Retorno fica dentro da função callback e não do lado de fora 
+
+Ex: x++ return x
+O Retorno fica dentro da função callback e não do lado de fora
 
 func i() func() int {
-	// OU seja esta variavel X terá valores diferentes para cada Referencia de Memoria
-	// E ainda somará o valores nas mesma Referencia de memoria.
-	x := 0 // será usado uma variavel do escopo Externo, gerando copias diferentes para cada Expressão Criada 
+// OU seja esta variavel X terá valores diferentes para cada Referencia de Memoria
+// E ainda somará o valores nas mesma Referencia de memoria.
+x := 0 // será usado uma variavel do escopo Externo, gerando copias diferentes para cada Expressão Criada
 
-	// aqui em baixo termos o CLOSURE onde retornamos o valor deste escopo interno{...} e não extermo{{...}}
-	return func() int {
-		///Ou seja para cada Invocação, será somado os valor de X
-		x++
-		return x
-	}
+    // aqui em baixo termos o CLOSURE onde retornamos o valor deste escopo interno{...} e não extermo{{...}}
+    return func() int {
+    	///Ou seja para cada Invocação, será somado os valor de X
+    	x++
+    	return x
+    }
+
 }
 
-
 #### Aula13 Func Recursividade
+
 ## OBS: Podemos usar Looks no lugar de recursividade
 
 https://www.youtube.com/watch?v=1-pop5h5RAs&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=97
@@ -813,18 +841,15 @@ https://www.youtube.com/watch?v=1-pop5h5RAs&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEX
 
 # https://pt.wikipedia.org/wiki/Fractal
 
-
 ## è uma função que no seu retorno é chamado ela mesma,
+
 WP: "The most common application of recursion is in mathematics and computer science, where a function being defined is applied within its own definition."
 Exemplos de recursividade: Fractais, matrioscas, efeito Droste (o efeito produzido por uma imagem que aparece dentro dela própria), GNU (“GNU is Not Unix”), etc.
 No estudo de funções: é uma função que chama a ela própria.
 Exemplo: fatoriais.
-4! = 4 * 3 * 2 * 1 (e no zero, deu.)
+4! = 4 _ 3 _ 2 \* 1 (e no zero, deu.)
 Com recursividade. Go Playground: https://play.golang.org/p/ujsLnUhRp_
 Com loops. Go Playground: https://play.golang.org/p/F2VsUjYVhc
-
-
-
 
 #### O que são Ponteiros
 
@@ -832,24 +857,21 @@ https://www.youtube.com/watch?v=l2YJ-5GpGr8&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEX
 
 https://pt.wikipedia.org/wiki/Ponteiro_(programa%C3%A7%C3%A3o)
 
-
 Em programação, um ponteiro ou apontador é um tipo de dado de uma linguagem de programação cujo valor se refere diretamente a um outro valor alocado em outra área da memória, através de seu endereço. Um ponteiro é uma simples implementação do tipo referência da Ciência da computação.
 
 ## ARQUITETURA
 
 Em programação, um ponteiro ou apontador é um tipo de dado de uma linguagem de programação cujo valor se refere diretamente a um outro valor alocado em outra área da memória, através de seu endereço. Um ponteiro é uma simples implementação do tipo referência da Ciência da computação.
 
-
 ## O Que é DeRerence
+
 https://pt.wikipedia.org/wiki/Refer%C3%AAncia_(ci%C3%AAncia_da_computa%C3%A7%C3%A3o)
 
 Em ciência da computação, uma referência é um tipo de dado que contém informação que indica dados armazenados em algum outro local ao invés de conter o próprio dado. Acessar o valor referenciado pela referência chama-se "dereferenciar". Referências são fundamentais para construir várias estruturas de dados (como uma lista ligada), e para transportar informação entre diferentes partes de um programa de computador.
 
 # Analogia de DeReference
+
 Uma referência pode ser comparada ao endereço de uma residência. Ela é um pequeno identificador com o qual é possível encontrar um objeto potencialmente muito maior. Encontrar uma residência a partir de seu endereço é como dereferenciar uma referência.
-
-
-
 
 Todos os valores ficam armazenados na memória.
 Toda localização na memória possui um endereço.
@@ -857,13 +879,13 @@ Um pointeiro se refere a esse endereço.
 Notações:
 &variável mostra o endereço de uma variável
 %T: variável vs. &variável
-*variável faz de-reference, mostra o valor que consta nesse endereço
-????: *&var funciona!
-*type é um tipo que contem o endereço de um valor do tipo type, nesse caso * não é um operador
-Exemplo: a := 0; b := &a; *b++
+_variável faz de-reference, mostra o valor que consta nesse endereço
+????: _&var funciona!
+_type é um tipo que contem o endereço de um valor do tipo type, nesse caso _ não é um operador
+Exemplo: a := 0; b := &a; \*b++
 Go Playground: https://play.golang.org/p/gC1qGFUYrV
 
-## OBS todos o valores em um endereço de memoria, podemos acessar estes endereços e ficar manipulandos como se fosse  uma variavel
+## OBS todos o valores em um endereço de memoria, podemos acessar estes endereços e ficar manipulandos como se fosse uma variavel
 
 a = Casa na Rua A, nº 10 (valor: 10)
 b = Papel com endereço da casa (valor: &a)
@@ -873,22 +895,22 @@ Endereço de b = Localização física do papel (na sua mão)
 
 São locais diferentes!
 
-
-
 #### Aula15 Documentação JSON
+
 https://www.youtube.com/watch?v=jnnIgvV0_yA&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=113
 
 https://pkg.go.dev/encoding/json
 https://go.dev/blog/json
 https://pkg.go.dev/encoding/json#example-Marshal
-# temos o  que converte Json para Go 
-https://mholt.github.io/json-to-go/ 
 
+# temos o que converte Json para Go
+
+https://mholt.github.io/json-to-go/
 
 Já entendemos ponteiros, já entendemos métodos. Já temos o conhecimento necessário para começar a utilizar a standard library.
 Nesse vídeo faremos uma orientação sobre como abordar a documentação.
 Essa aula não foi preparada. Vai ser tudo ao vivo no improviso pra vocês verem como funciona o processo.
-golang.org → Documents → Package Documentation 
+golang.org → Documents → Package Documentation
 godoc.org → encoding/json
 files
 examples
@@ -897,9 +919,9 @@ types
 methods
 
 type Message struct {
-    Name string
-    Body string
-    Time int64
+Name string
+Body string
+Time int64
 }
 
 m := Message{"Alice", "Hello", 1294706395881547000}
@@ -907,50 +929,58 @@ m := Message{"Alice", "Hello", 1294706395881547000}
 we can marshal a JSON-encoded version of m using json.Marshal:
 
 # Nesta instancia recebemos o Bite e o Error
+
 b, err := json.Marshal(m)
 
 # Decoding A Func retorna mutiliplos valores, Data e Error
+
 To decode JSON data we use the Unmarshal function.
 func Unmarshal(data []byte, v interface{}) error
 
 # We must first create a place where the decoded data will be stored
+
 var m Message
 
 # and call json.Unmarshal, passing it a []byte of JSON data and a pointer to m
+
 err := json.Unmarshal(b, &m)
 
 # If b contains valid JSON that fits in m, after the call err will be nil and the data from b will have been stored in the struct m, as if by an assignment like:
+
 m = Message{
-    Name: "Alice",
-    Body: "Hello",
-    Time: 1294706395881547000,
+Name: "Alice",
+Body: "Hello",
+Time: 1294706395881547000,
 }
 
 ### Relembrando o operador NIL
+
 ## Operador NIL em GO
+
 # Em resumo: nil em Go é um valor válido que indica "não aponta para nada", enquanto undefined em JS é a ausência de valor propriamente dita. São conceitos diferentes com propósitos diferentes!
 
 Go (nil apenas para):
-Ponteiros (*T)
+Ponteiros (\*T)
 Slices ([]T)
 Maps (map[T]T)
 Channels (chan T)
 Functions
 Interfaces
 
-
 #### aula15B Go Marchal (Ordenação) em Json
+
 # De Go para Json
+
 https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=114
 
 Exemplo: transformando structs em Go em código JSON.
 No improviso tambem.
 Go Playground: https://play.golang.org/p/_JvCOlK-H9
 
-
-
 #### Aula15 C UnMarshal (Desordenando) Json
+
 # De Json para GO
+
 https://www.youtube.com/watch?v=mcbj-wy8Ro8&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=116
 https://pkg.go.dev/encoding/json#Unmarshal
 https://mholt.github.io/json-to-go/
@@ -961,12 +991,15 @@ Marshal/unmarshal vs. encoder/decoder
 Marshal vai pra uma variável
 Tags
 Encoder "vai direto"
-# `json:"Nome"`  Isto são as Tags Encoder
+
+# `json:"Nome"` Isto são as Tags Encoder
+
 Ex de uso das Tags Encoder no Campo Profissão que recebe Trabalho, poderia ser o contrario tb
 Go Playground: https://play.golang.org/p/l6wbuLu1NS
 Com Encoder: https://play.golang.org/p/Pgwr0O07aL
 
 ## Precisamos Criar uma função de UnMarshal
+
 # O retorno vem Nulo ou em um Ponteiro `v` , tem que haver os mesmo campos, caso contrario teremos error `errors.ErrUnsupported`
 
 func Unmarshal(data []byte, v any) error
@@ -986,27 +1019,29 @@ Se o tipo de valor implementar `Unmarshaler`, o método `UnmarshalJSON` será ch
 Se o valor implementar `encoding.TextUnmarshaler` e a entrada for uma string JSON, o método `UnmarshalText` será chamado com a string sem aspas.
 
 #### Aula15D UnMarshal E Marshal com as Funções NewDecoder NewEncoder
+
 # Continuação do video depois do minuto 10
+
 https://www.youtube.com/watch?v=mcbj-wy8Ro8&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=116
 https://cs.opensource.google/go/go/+/refs/tags/go1.27.0:src/encoding/json/v2_stream.go;l=38
-
 
 Marshal/unmarshal vs. encoder/decoder
 Marshal vai pra uma variável
 Encoder "vai direto"
 
 ## Resumo, todo Encoder que eu fizer é para IR direto para Interface os.Stdout, sem variaveis
-	encoder := json.NewEncoder(os.Stdout)
 
-	encoder.Encode(toniFilho) //{"Nome":"Tony","SobreNome":"Filho","Idade":40,"Profissao":"Developer","ContaBancaria":1000}
+    encoder := json.NewEncoder(os.Stdout)
+
+    encoder.Encode(toniFilho) //{"Nome":"Tony","SobreNome":"Filho","Idade":40,"Profissao":"Developer","ContaBancaria":1000}
 
 Com Encoder: https://play.golang.org/p/Pgwr0O07aL
 
 ## Aqui podemos fazer Encoder de forma mais dinamica
 
-func NewDecoder(r io.Reader) *Decoder
+func NewDecoder(r io.Reader) \*Decoder
 
-func NewDecoder(r io.Reader) *Decoder
+func NewDecoder(r io.Reader) \*Decoder
 NewDecoder retorna um novo decodificador que lê de r.
 
 O decodificador introduz seu próprio buffer e pode ler dados de r além dos valores JSON solicitados.
@@ -1026,23 +1061,28 @@ Decode lê o próximo valor codificado em JSON de sua entrada e o armazena no va
 
 Consulte a documentação de `Unmarshal` para obter detalhes sobre a conversão de JSON em um valor Go.
 
-
 #### aula16 A Interface WRITER
+
 https://www.youtube.com/watch?v=S4hEdA0RPVI&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=116
 
 https://pkg.go.dev/io#Writer
 
 ## A interface writer do pacote io.
+
 # OBS O Tipo File Implementa a Interface Writer, por isto que Escrevemos
+
 ## Recebe um Slice de [] Bytes e retorna um Numero e um Erro quando houver, senão um nil
+
 # Para implementar precisamos de uma Função que recebe o Metodo Write(p []byte) (n int, err error)
+
 type Writer interface {
-	Write(p []byte) (n int, err error)
+Write(p []byte) (n int, err error)
 }
 
-# type Writer interface { Write(p []byte) (n int, err error) } 
-Recebemos aqui um WRITE 
-pkg os:   func (f *File) Write(b []byte) (n int, err error)
+# type Writer interface { Write(p []byte) (n int, err error) }
+
+Recebemos aqui um WRITE
+pkg os: func (f \*File) Write(b []byte) (n int, err error)
 
 # Ex: pkg json: func NewEncoder(w io.Writer) *Encoder Esta função recebe um io.WRITER e retorna um Ponteiro de *Encoder
 
@@ -1062,17 +1102,20 @@ type Conn interface { [...] Write(b []byte) (n int, err error) [...] }
 
 Resumo
 1º Temos a Interface Write que tem o Metodo Write type Writer interface { Write(p []byte) (n int, err error) }
-2º temos uma função: func (f *File) Write(b []byte) (n int, err error) que implementa este metodo       da Interface Write
-3º Por fim temos uma Função que recebe dados pela Interface io.Write e retorna um Pondeiro      : func NewEncoder(w io.Writer) *Encoder
+2º temos uma função: func (f *File) Write(b []byte) (n int, err error) que implementa este metodo da Interface Write
+3º Por fim temos uma Função que recebe dados pela Interface io.Write e retorna um Pondeiro : func NewEncoder(w io.Writer) *Encoder
 A Grande questão é que esta Interface não é so usada Imprimir, é Implementada em Muita coisa em GO!
-Ex: É a Função de Conexão func DIAL que implementa a Interface Conn , mas a  interface Conn implementa o metodo WRITE:
+Ex: É a Função de Conexão func DIAL que implementa a Interface Conn , mas a interface Conn implementa o metodo WRITE:
 Função func Dial(network, address string) (Conn, error)
 O Seja TUDO que tem o METODO WRITE pode ser recebido como ARGUMENTO
 Ate uma conexão de REDE é passado como WRITE
 
 #### Aula17 Função do Pacote Sort
-## Conhecendo o Sort e na aula17B, fazendo  modificações
+
+## Conhecendo o Sort e na aula17B, fazendo modificações
+
 # O Sort é um Função, e com isto podemos costumizar
+
 https://www.youtube.com/watch?v=b67JIGYM6Hc&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=117
 
 Sort serve para ordenar slices.
@@ -1081,7 +1124,7 @@ golang.org/pkg/ → sort
 godoc.org/sort → examples
 Sort altera o valor original!
 Exemplo: Ints, Strings.
-Go Playground: 
+Go Playground:
 sort.Strings: https://play.golang.org/p/Rs1NVwmg7h
 sort.Ints: https://play.golang.org/p/I2_vsHujZa
 Aprenda Go explora as funcionalidades do pacote s
@@ -1089,31 +1132,41 @@ Aprenda Go explora as funcionalidades do pacote s
 #### Aula17B Usando a interface.Interface
 
 ## Criando nosso Proprio Sort
+
 https://www.youtube.com/watch?v=0E-q22d3QD4&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=118
 
 O sort que eu quero não existe. Quero fazer o meu.
+
 # Para isso podemos usar o func Sort do package sort. Vamos precisar de um sort.Interface.
+
 ## type Interface interface { Len() int; Less(i, j int) bool; Swap(i, j int) }
+
 Ou seja, se tivermos um tipo que tenha esses métodos, ao executar sort.Sort(x) as funções que vão rodar são as minhas, não as funções pré-prontas como no exercício anterior.
 E aí posso fazer do jeito que eu quiser.
 Exemplo:
 struct carros: nome, consumo, potencia
-slice []carros{carro1, carro2, carro3} (Sort ordena *slices!*)
+slice []carros{carro1, carro2, carro3} (Sort ordena _slices!_)
 tipo ordenarPorPotencia
 tipo ordenarPorConsumo
 
 Go Playground: https://play.golang.org/p/KOIhAsE3OK
 
-#	1º FUNÇÃO SORT ordena DADOS e recebe como Paramentro a  interface.Interface func Sort(data Interface)
-#   2º A interface.Interface tem 3 metodos { Len() int; Less(i, j int) bool; Swap(i, j int) }
-#   3º Podemos extender  Automaticamente a FUNÇÃO SORT se implementarmos os Metodos assima. e 
-	* com isto podemos costumisar o que queremos, caso Ex: poderiamos receber um [] Slice de uma lista VIP, onde ordenariamos
-	* os melhores clientes 
+# 1º FUNÇÃO SORT ordena DADOS e recebe como Paramentro a interface.Interface func Sort(data Interface)
+
+# 2º A interface.Interface tem 3 metodos { Len() int; Less(i, j int) bool; Swap(i, j int) }
+
+# 3º Podemos extender Automaticamente a FUNÇÃO SORT se implementarmos os Metodos assima. e
+
+    * com isto podemos costumisar o que queremos, caso Ex: poderiamos receber um [] Slice de uma lista VIP, onde ordenariamos
+    * os melhores clientes
+
 # 4º Temos que criar os TIPOS.
-#	5º Criamos os Metodos para os TIPOS , estes Metodos costumisados
-	* fazem com que estes TIPOS implemente AUTOMATICAMENTE a interface.Interface tem a FUNçÃO SORTE
-#	6º Como os TIPOS Implementam a inteface.Interface podemos usar a Função neles, e desta forma ordenamos de forma customisado
-	
+
+# 5º Criamos os Metodos para os TIPOS , estes Metodos costumisados
+
+    * fazem com que estes TIPOS implemente AUTOMATICAMENTE a interface.Interface tem a FUNçÃO SORTE
+
+# 6º Como os TIPOS Implementam a inteface.Interface podemos usar a Função neles, e desta forma ordenamos de forma customisado
 
 #### Aula18 BCrypt
 
@@ -1124,13 +1177,17 @@ https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/16_aplicacao/bcrypt
 x/crypto/bcrypt
 GenerateFromPassword
 CompareHashAndPassword
+
 # Sem Go Playground! No terminal, dentro da pasta do seu projeto, execute:
 
 # Tem que criar o Modulo
+
 # 1. Inicialize o módulo na pasta atual
+
 go mod init aula18
 
 # 2. Agora instale o bcrypt
+
 go get golang.org/x/crypto/bcrypt
 
 # 3. Seu arquivo go.mod será criado/atualizado
@@ -1138,16 +1195,23 @@ go get golang.org/x/crypto/bcrypt
 #### Aula19 Concorrencia Vs Paralelismo
 
 # Concorrência é quando abre uma padaria do lado da outra e as duas quebram :)
-Fun facts: 
+
+Fun facts:
+
 # 01 O primeiro CPU dual core "popular" veio em 2006
+
 Em 2007 o Google começou a criar a linguagem Go para utilizar essa vantagem
+
 # Go foi a primeira linguagem criada com multi-cores em mente C, C++, C#, Java, JavaScript, Python, etc., foram todas criadas antes de 2006
+
 Ou seja, Go tem uma abordagem única (fácil!) para este tópico
+
 # E qual a diferença entre concorrência e paralelismo?
 
 ## Concorrencia com Goroutines & WaitGroups
 
 # O código abaixo é linear. Como fazer as duas funções rodarem concorrentemente?
+
 https://play.golang.org/p/XP-ZMeHUk4
 Goroutines!
 O que são goroutines? São "threads."
@@ -1166,13 +1230,14 @@ Só pra ver: runtime.NumCPU() & runtime.NumGoroutine()
 
 Go Playground: https://play.golang.org/p/8iiqLX4sWc
 
-# hread (em português: fio de execução[1] ou encadeamento de execução) é uma forma como um processo/tarefa de um programa de computador é divido em duas ou mais tarefas que podem ser executadas concorrentemente ("simultâneo"). 
+# hread (em português: fio de execução[1] ou encadeamento de execução) é uma forma como um processo/tarefa de um programa de computador é divido em duas ou mais tarefas que podem ser executadas concorrentemente ("simultâneo").
 
 ## aparentemente vejo algo parecido com a PROMISES, pois precisamos esperar o fim da execução
 
+#### Aula19B Concorrência – 2. Goroutines & WaitGroups
 
-#### Aula19B Concorrência – 2. Goroutines & WaitGroups 
 # Continuação
+
 https://www.youtube.com/watch?v=4jXSU2jw3Ag&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=126
 
 Exemplo: código termina antes da go func executar.
@@ -1188,30 +1253,32 @@ Só pra ver: runtime.NumCPU() & runtime.NumGoroutine()
 
 Go Playground: https://play.golang.org/p/8iiqLX4sWc
 
-# Como ja vimos o main() terminou antes da goroutine go Func01() e foi descartada e precisamos usar o WaitGroup  para controlar a execução
+# Como ja vimos o main() terminou antes da goroutine go Func01() e foi descartada e precisamos usar o WaitGroup para controlar a execução
 
-
-#### Aula19D  Concorrência – 4. Na prática: Condição de corrida
+#### Aula19D Concorrência – 4. Na prática: Condição de corrida
 
 https://www.youtube.com/watch?v=XxG7qqJzDKk&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=128
 
 Aqui vamos replicar a race condition mencionada no artigo anterior.
 time.Sleep(time.Second) vs. runtime.Gosched()
 go help → go help build → go run -race main.go
-Como resolver? Mutex. 
+Como resolver? Mutex.
 
 # Resulmo vais goroutines leram uma variavel compartilhada e não conseguiram salvar na variavel
 
+#### Aula19E Concorrência – 5. Mutex
 
-#### Aula19E  Concorrência –  5. Mutex
 https://www.youtube.com/watch?v=egd4WHJMwC0&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=129
 https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/18_concorrencia/06_mutex/main.go
+
 # https://pkg.go.dev/sync#Mutex
 
-
 Agora vamos resolver a race condition do programa anterior utilizando mutex.
+
 # Mutex é mutual exclusion, exclusão mútua.
+
 # Utilizando mutex somente uma thread poderá utilizar a variável contador de cada vez, e as outras deve aguardar sua vez "na fila."
+
 Na prática:
 type Mutex
 func (m *Mutex) Lock()
@@ -1224,17 +1291,14 @@ Um Mutex não deve ser copiado após o primeiro uso.
 
 Na terminologia do modelo de memória do Go, a n-ésima chamada a `Mutex.Unlock` "sincroniza antes" da m-ésima chamada a `Mutex.Lock` para qualquer n < m. Uma chamada bem-sucedida a `Mutex.TryLock` é equivalente a uma chamada a `Lock`. Uma chamada malsucedida a `TryLock` não estabelece nenhuma relação de "sincroniza antes".
 
-
-
-
-
-
 #### Aula19F Atomic
+
 https://www.youtube.com/watch?v=iFlQ2yAYcp4&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=130
 
 https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/18_concorrencia/07_atomic/main.go
 
 # https://pkg.go.dev/sync/atomic
+
 Agora vamos fazer a mesma coisa, mas com atomic ao invés de mutex.
 atomic.AddInt64
 atomic.LoadInt64
@@ -1245,15 +1309,14 @@ Essas funções exigem muito cuidado para serem usadas corretamente. Exceto para
 
 A operação de troca (swap), implementada pelas funções `SwapT`, é o equivalente atômico de:
 
+##### Aula20 Package Organizations 8. Pacotes
 
-##### Aula20 Package Organizations  8. Pacotes
 ## OBS tem q dar o "go mod init"
 
 https://www.youtube.com/watch?v=SO-RFPSqD3c&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=138
-https://rakyll.org/style-packages/ 
+https://rakyll.org/style-packages/
 
 https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/19_seu-ambiente-de-desenvolvimento/pacotes
-
 
 Opção 1: uma pasta, vários arquivos.
 package declaration em todos os arquivos
@@ -1269,13 +1332,16 @@ Em Go não utilizamos os termos "público" e "privado" como em outras linguagens
 Com maiúscula: exportado, visível fora do package
 Com minúscula: não exportado, não utilizável fora do package
 
-#### Aula21  Canais – 1. Entendendo canais
+#### Aula21 Canais – 1. Entendendo canais
 
 https://www.youtube.com/watch?v=jF0xuhnPkDg&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=146
 
 # Canais são o Jeito Certo® de fazer sincronização e código concorrente.
+
 # Eles nos permitem trasmitir valores entre goroutines.
+
 # Servem pra coordenar, sincronizar, orquestrar, e buffering.
+
 Na prática:
 make(chan type, b)
 Canais bloqueiam:
@@ -1287,32 +1353,38 @@ Ou se um corredor ficar esperando receber o bastão, mas ninguem entregar...
 Exemplos:
 Poe um valor num canal e faz um print. Block.
 Código acima com goroutine.
+
 # Ou com buffer. Via de regra: má idéia; é legal em certas situações, mas em geral é melhor sempre passar o bastão de maneira sincronizada.
+
 Interessante: ref/spec → types
-Código: 
+Código:
 Block: https://play.golang.org/p/dClS7vQlYE (não roda!)
 Go routine: https://play.golang.org/p/ZbNCwUuiPi
 Buffer: https://play.golang.org/p/32vYvCR7qn
 Buffer block: https://play.golang.org/p/smeW6vigAT
 Mais buffer: https://play.golang.org/p/Pe2pcboGiA
 
-
 #### Aula21C Canais Assignment/conversion
 
-# Assignment/conversion: 
+# Assignment/conversion:
+
 de geral para específico
 de específico para geral não
 Exemplos:
+
 # geral pra específico: https://play.golang.org/p/H1uk4YGMBB
 
-# específico pra específico: https://play.golang.org/p/8JkOnEi7-a 
+# específico pra específico: https://play.golang.org/p/8JkOnEi7-a
+
 // cs = cr // cannot use cr (variable of type <-chan int) as chan<- int value in assignment
 
 # específico pra geral: https://play.golang.org/p/4sOKuQRHq7
+
 // fmt.Printf("c\t%T\n", (chan int)(cs))
 // fmt.Printf("c\t%T\n", (chan int)(cr))
 
-# atribuição tipos != (Diferentes) https://play.golang.org/p/bG7H6l03VQ 
+# atribuição tipos != (Diferentes) https://play.golang.org/p/bG7H6l03VQ
+
 fmt.Println("teremos error de tipagem ")
 
 Em funcs podemos especificar:
@@ -1320,15 +1392,14 @@ receive channel
 Parâmetro receive channel: (c ←chan int)
 No scope dessa função, esse canal só recebe
 Não podemos fechar um receive channel
-send channel 
+send channel
 Parâmetro send channel: (c chan← int)
 No scope dessa função, esse canal só envia
 Podemos fechar um send channel
 Exemplo: passando informação de uma função para outra.
 Código: https://play.golang.org/p/TlcSm8bHkW (replay)
 
-
-#### Aula21D  Canais – 3. Range e close
+#### Aula21D Canais – 3. Range e close
 
 Range:
 gofunc com for loop com send e close(chan)
@@ -1337,53 +1408,134 @@ recebe com range chan
 Código: https://play.golang.org/p/_g5IEjSkh1
 
 # O problema está na execução das goroutines
+
 Seu código não imprime os valores porque as goroutines não têm tempo para executar antes do programa terminar.
 
 # O que são goroutines?
+
 São "threads leves" que executam em paralelo
 
 Quando main termina, todas as goroutines são mortas
 
-## Linha do Tempo → Sem WaitGroup 
+## Linha do Tempo → Sem WaitGroup
+
 ## Tempo →
+
 # main: inicia → cria canal → inicia goroutine1 → inicia goroutine2 → FIM
+
 goroutine1: inicia → envia 0 → envia 1 → ... (não termina)
 goroutine2: inicia → espera dados do canal → ... (não termina)
 
-## Linha do Tempo → Com WaitGroup 
+## Linha do Tempo → Com WaitGroup
+
 ## Tempo →
-# main: inicia → cria canal → inicia goroutine1 → inicia goroutine2 → espera (WAIT) 
+
+# main: inicia → cria canal → inicia goroutine1 → inicia goroutine2 → espera (WAIT)
+
 goroutine1: inicia → envia 0 → envia 1 → ... → close → done!
 goroutine2: inicia → recebe 0 → recebe 1 → ... → range termina → done!
-                                                                      
+
 main: wait desbloqueia → FIM (só depois que ambas terminaram)
 
+#### Aula21E Canais – 4. Select
 
-#### Aula21E   Canais – 4. Select 
 https://www.youtube.com/watch?v=dp8s5jAc7h0&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=149
 
 # Select é como switch, só que pra canais, e não é sequencial.
 
 "A select blocks until one of its cases can run, then it executes that case. It chooses one at random if multiple are ready." — https://tour.golang.org/concurrency/5
 Na prática:
+
 # Exemplo 1:
+
 Duas go funcs enviando X/2 numeros cada uma pra um canal
 For loop X valores, select case ←x
 Go Playground:
+
 1. https://play.golang.org/p/xC3e1wBxgv
 
-
 # Exemplo 2:
+
 Func 1 recebe X valores de canal, depois manda qualquer coisa pra chan quit
 Func 2 for infinito, select: case envia pra canal, case recebe de quit
-Go Playground:
-2. https://play.golang.org/p/_NZqhBXN-v
-
+Go Playground: 2. https://play.golang.org/p/_NZqhBXN-v
 
 # Exemplo 3:
+
 Chans par, ímpar, quit
 Func send manda números pares pra um canal, ímpares pra outro, e fecha/quit
 Func receive é um select entre os três canais, encerra no quit
 Problema!
-Go Playground:
-3. https://play.golang.org/p/rK8QwsBo0H
+Go Playground: 3. https://play.golang.org/p/rK8QwsBo0H
+
+#### Aula21F Canais – 5. A expressão comma ok
+
+https://github.com/vkorbes/aprendago/blob/master/c%C3%B3digo/21_canais/06_exerc%C3%ADcio_anterior/main.go
+
+https://www.youtube.com/watch?v=wWQ0BbbQ-28&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=150
+
+v, ok := ←chan
+Se receber valor: v, true
+Canal fechado, nada, etc.: zero v, false
+Agora vamos resolver o problema do exercício anterior usando comma ok.
+
+#### Aula21F Ex02 Canais – 5. A expressão comma ok
+
+# Na documentação do Go é dito que quando tentamos ler um canal
+
+fechado ele responde com o valor zero do tipo do canal e um false no comma ok. Ali  no exemplo,
+quando os canais 'par' e 'ímpar' são fechados, antes do true ser enviado para o 'quit',
+a goroutine da função receive pode acabar realizando a leitura dos canais já fechados e recebendo um valor 0,
+daí como não há a verificação do comma ok neles, esse 0 é tratado como um valor válido.
+Acredito que uma possível solução seria enviar o true para o canal 'quit' e depois disso, fechar os
+canais 'par' e 'ímpar', assim não precisaria verificar o comma ok dos canais 'par' e 'ímpar', pois a
+informação do canal canal 'quit' chegaria primeiro na função receive, e ela já pararia e não tentaria ler os demais canais.
+
+#### Aula Canais – 6. Convergência
+
+https://www.youtube.com/watch?v=VJyryKEMleU&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=152
+https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/21_canais/07
+
+# Observamos convergência quando informação de vários canais é enviada a um número menor de canais.
+Interessante:
+Na prática, exemplos:
+# Exemplo01. Todd: 
+Canais par, ímpar, e converge. 
+Func send manda pares pra um, ímpares pro outro, depois fecha.
+Func receive cria duas go funcs, cada uma com um for range, enviando dados dos canais par e ímpar pro canal converge. Não esquecer de WGs!
+Por fim um range retira todas as informações do canal converge.
+
+#### Aula21G Exemplo02
+
+https://www.youtube.com/watch?v=VJyryKEMleU&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=155
+# Exemplo02. Rob Pike (palestra Go Concurrency Patterns):
+Func trabalho cria um canal, cria uma go func que manda dados pra esse canal, e retorna o canal. Interessante: time.Duration(rand.Intn(1e3))
+Func converge toma dois canais, cria um canal novo, e cria duas go funcs com for infinito que passa tudo para o canal novo. Retorna o canal novo.
+Por fim chamamos canal := converge(trabalho(nome1), trabalho(nome2)) e usamos um for para receber dados do canal var.
+
+
+/*
+novo <- x
+//     ↑
+//     x é enviado para novo
+//     Mas x é um canal, não uma string!
+
+novo <- <-x
+//     ↑  ↑
+//     |  └── Recebe um valor de x (string)
+//     └── Envia esse valor para novo
+**/
+
+/*
+// Opção 1: Separado (mais legível)
+v := <-x
+novo <- v
+
+// Opção 2: Junto (conciso mas confuso)
+novo <- <-x
+
+// Opção 3: Com range (melhor para múltiplos valores)
+for v := range x {
+    novo <- v
+}
+**/

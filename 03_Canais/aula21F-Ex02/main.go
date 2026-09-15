@@ -31,6 +31,7 @@ func mandaNumerosCanail(par, impar chan int, quit chan bool) {
 			impar <- i
 		}
 	}
+	/**Temos q por o Canal quit antes do close()*/
 	quit <- true
 	close(par)
 	close(impar)

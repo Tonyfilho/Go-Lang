@@ -1,12 +1,11 @@
-#### Aula 19 Especial - Entendendo Go Routines minuto 45
+#### Curso de Go no canal Full Cycle
+
+#### FullCicles GoRoutines - Entendendo Go Routines minuto 45 do video 
+
+## Aula 19 Especial - Entendendo Go Routines minuto 45
 https://www.youtube.com/watch?v=B4NL0rMvXMg
 
-
-
 ## Aqui entenderemos que: Enquando não for usando o valor que está em uma GoRoutines, não será atribuido um novo valor.
-
-
-
 
 # Se ninguem usar esta Variavel QUEUE em outra GoRoutine, a tribuição fica Bloqueada
 
@@ -51,3 +50,35 @@ close(queue) após iniciar goroutine	Fecha antes de enviar valores	Não feche se
 <-queue na mesma goroutine que envia	Não demonstra concorrência	Remova, deixe só o consumidor ler
 close(queue) antes de lerGoRoutines	Range termina imediatamente	Feche APÓS o envio, ou não feche
 Falta de time.Sleep ou controle	Loop muito rápido para ver	Adicione pausa para visualizar
+
+
+#### Aula19 Ex02 Explicação de GoRoutine e o Uso do Close()
+
+# neste exemplo estamos compartinhando variavel QUEUE entre o escopo de MAIN{} e o escopo da Go Routine Função expressa {}()
+
+
+### OBS: Sobre o close()
+
+go
+# // ✅ CORRETO: Fechar quando o produtor TERMINAR
+go func() {
+    defer close(queue)  // Fecha quando a goroutine terminar
+    for i := 0; i < 10; i++ {
+        queue <- i
+    }
+    // Aqui a goroutine termina e o close() é chamado
+}()
+
+# // ✅ Consumidor usa range (termina quando o canal fechar)
+for x := range queue {
+    fmt.Println(x)
+}
+
+# // ❌ ERRADO: Loop infinito + close
+go func() {
+    for {  // Loop infinito
+        queue <- i
+        i++
+    }
+}()
+# close(queue)  // ❌ Nunca deveria fechar (produtor ainda está ativo)

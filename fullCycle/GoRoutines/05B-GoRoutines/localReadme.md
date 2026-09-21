@@ -1,4 +1,5 @@
-#### Aula19 Ex02 Explicação de GoRoutine e o Uso do Close()
+#### #### FullCicles GoRoutines - Entendendo Go Routines minuto 45
+# GoRoutine e o Uso do Close()
 
 # neste exemplo estamos compartinhando variavel QUEUE entre o escopo de MAIN{} e o escopo da Go Routine Função expressa {}()
 

@@ -12,6 +12,14 @@ Uma func manda X números ao primeiro canal.
 Outra func faz um range deste canal, e para cada ítem lança uma go func que poe o retorno de trabalho() no canal dois.
 Trabalho() é um timer aleatório pra simular workload.
 Por fim, range canal dois demonstra os valores.
-# 2. Com throttling! Ou seja, com um número máximo de go funcs.
-Ídem acima, mas a func que lança go funcs é assim:
-Cria X go funcs, cada uma com um range no primeiro canal que, para cada item, poe o retorno de trabalho() no canal dois.
+
+# 01º Começamos com 1 canal e terminaremos com 1 canal, ate aqui não temos divergenci
+# 02º Madamos X numeros para 1º canal Func: Mand
+# 03º Pega cada numero do 1º canal  e manda 10 Thread ou 10(GoRoutine) que abastece o canal02
+* ou seja temos 10 itens no canal01 e com range criaremos 10 Goroutines ou threads no canal02.
+* Ou seja dividimos ou espalhamos o TRABALHO do processador em 10 GoRoutines e todas foram processadas 
+* concorrentemente e pois colocamos tudo no canal02
+
+# Então imagine q temos um trabalho para fazer onde NÓS determinamos quantas Threads ou GoRoutine irá fazer o mesmo trabalho
+  * esta é a moral deste exercicio.
+  

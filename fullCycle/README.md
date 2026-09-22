@@ -1,8 +1,52 @@
+#### Aula02 Sobre Packages e importações como funciona
+
+# 📁 Estrutura que vamos criar
+pacotes/
+├── go.mod                    ← módulo: pacotes
+├── main.go                   ← package main
+└── math/                     ← subpacote
+    └── math.go               ← package math
+
+
+# 2. Inicialize o módulo (cria o go.mod)
+Dentro da pasta pacotes, execute:
+
+bash
+go mod init pacotes
+Isso vai criar o arquivo go.mod com este conteúdo:
+
+# 💡 O nome pacotes é o nome do módulo. Você pode usar qualquer nome, mas evite espaços e caracteres especiais. O ideal seria algo como github.com/seu-usuario/pacotes, mas para estudo local, pacotes já serve.
+
+Dentro de pacotes/math/, crie o arquivo math.go:
+
+# ⚠️ Atenção: O nome do pacote (package math) é o que você vai usar no import do main.go. Como o pacote se chama math, o caminho do import será pacotes/math
+
+
+Podemos ter mais de uma arquivo no mesmo Packge, o Go vai acha-lo
+
+## Obs: Podemos ter acesso, a Variaveis, Funções dentro dos packages
+
+# Lembrando que inicio de nome de variaveis , funções e metodos  Upcase = public e DownCase = privite
+
+
+# Documentação e uso do GoDoc
+ Documentação em Go Ex:  da função criada, tem que começar com nome da Função iqualmente a declaração.
+# Isto a biblioteca GoDoc reconhece este padrão e faz a documentação para nos
+Ex:
+// Soma faz a soma de 2 numeros e retorna um int
+func Soma(a, b int) int {
+
+	return a + b
+}
+
+
+
+
 #### Curso de Go no canal Full Cycle
 
 #### FullCicles GoRoutines - Entendendo Go Routines minuto 45 do video 
 
-## Aula 19 Especial - Entendendo Go Routines minuto 45
+##  - Entendendo Go Routines minuto 45
 https://www.youtube.com/watch?v=B4NL0rMvXMg
 
 ## Aqui entenderemos que: Enquando não for usando o valor que está em uma GoRoutines, não será atribuido um novo valor.
@@ -82,3 +126,29 @@ go func() {
     }
 }()
 # close(queue)  // ❌ Nunca deveria fechar (produtor ainda está ativo)
+
+#### Aula Video04 Essa é a técnica para tratar erros em Golang Exemplo 01
+
+https://www.youtube.com/watch?v=f--pS45o_zg&list=PL5aY_NrL1rjucQqO21QH8KclsLDYu1BIg&index=4
+
+# O erro no GoLang é tradado de forma diferente, sem Try and Catch, o erro m Go tem as mesma prioridade do que os dados.
+
+#  No Go o Erro é explicitos na maioria das funções
+em Go podemos retornar mais de 1 valor em um função, com isto podemos retornar o valor e o error caso exista.
+
+# O grande diferencial é que podemos escolher o que faremos com erro.
+Ex: Posso dar Panic, Logfatal, ou chamar um outro recurso etc
+
+#### Aula Video04 Essa é a técnica para tratar erros em Golang Exemplo 02
+
+# Criando seu proprio error
+
+Criaremos um função simples onde teremos o retorno de um dado e do erro caso haja
+
+Caso não queira usar a variavel de erro, poderá usar Blank Indentifier "_"
+ou seja o underscore no lugar da var err
+
+# Ex res, _ := soma(1, 10) com isto não temos a continuação do error, mas como saberá
+
+è uma variavel que exclui o dado para não ser utilizado
+

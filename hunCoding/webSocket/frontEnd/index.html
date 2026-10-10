@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Tony</title>
+    <style>
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            min-height: 10vh;
+
+            overflow: scroll;
+        }
+
+        #messages li {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- A lista esta vazia, pois não sabemos ou recebemos ainda as mensagens -->
+    <ul id="messages"> </ul>
+
+    <form id="form" >
+        <input id="userName" autocomplete="off" type="text" placeholder="Enter your name"  required/>
+        <input id="message" autocomplete="off" type="text" placeholder="Enter your message"  required/>        
+        <button type="submit">Send Message</button>
+    </form>
+
+    <!-- script -->
+     <script>
+        // aqui será criado o websoket, e a rota que será usada para o front end se comunicar com o backend
+         const ws = new WebSocket("ws://localhost:8081/ws");
+         // temos 2 funções, uma para receber as mensagens e outra para enviar as mensagens
+         ws.onmessage = function() {
+            const msg = JSON.parse(event.data);
+            // assim q rivermos a mensagem, vamos criar um item de lista e adicionar a mensagem recebida na <li> e depois adicionar a <li> na lista de mensagens
+            const item = document.createElement("li");
+            item.textContent = `${msg.userName}: ${msg.message}`;
+            document.getElementById("messages").appendChild(item);
+         };
+
+         // aqui pega a mensagem do input e envia para o backend, e depois limpa o input
+
+         document.getElementById("form").onsubmit = function(e) {
+            e.preventDefault();
+            const userName = document.getElementById("userName").value;
+            const message = document.getElementById("message").value;
+            /// isto vai cair no handleConnections do backend, e lá vamos tratar a mensagem recebida
+            /// vai ler e mandar para broadcastMessage, e lá vamos enviar para todos os clientes conectados
+            ws.send(JSON.stringify({ userName, message }));
+            document.getElementById("message").value = "";
+         };
+
+     </script>
+
+</body>
+
+</html>

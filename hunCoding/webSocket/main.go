@@ -15,6 +15,7 @@ func main() {
 	/**Agora direcionaremos o cliente para frontend*/
 	/*Quando alguem acessar o / ele chama o frontend**/
 	http.Handle("/", fs)
+	http.Handle("/tonyFilho", fs)
 	/*Quando alguem acessar /talkabout-tony ele chama o HandleConnections**/
 	http.HandleFunc("/ws", web.HandleConnections)
 	/* O proximo Passo é colocar o HandleMessage**/

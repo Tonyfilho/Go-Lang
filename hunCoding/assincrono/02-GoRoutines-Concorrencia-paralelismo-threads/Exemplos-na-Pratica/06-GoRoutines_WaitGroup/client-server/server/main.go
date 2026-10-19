@@ -18,13 +18,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-/**Enquanto ele receber conexão vai abrir uma nova variavel de conexão e se não tiver erros dará um handle na conexão*/
+	/**Enquanto ele receber conexão vai abrir uma nova variavel de conexão e se não tiver erros dará um handle na conexão*/
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
 			log.Fatal(err)
 		}
-		handleConn(conn)
+		/**sem GoRoutines ficamos somente 1 conexão e a mesma fica presa*/
+		//handleConn(conn)
+		/**Usando agora a GoRoutine, o serve passa a criar 1 goRoutine por conexão e com isto
+		para cada terminal aberto temos uma nova conexão CONCORRENTEMENTE*/
+		go handleConn(conn)
 	}
 
 	///fmt.Println("Fim do programa")

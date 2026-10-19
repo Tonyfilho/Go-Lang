@@ -21,12 +21,12 @@ func main() {
 	que são execudadas em concorrencia e tempos diferentes? **/
 	/**Neste exemplo usaremos Ponteiros*/
 	var test string = "teste de ponteiro"
-	/**Criando um var pontTest q é um Ponteiro de string, onde recebemos o endereço de memoria da variável test*/
-	var pontTest *string = &test
+	/**Criando um var pointTest q é um Ponteiro de string, onde recebemos o endereço de memoria da variável test*/
+	var pointTest *string = &test
 
 	/**Chamaremos a func funcPointer e passaremos o ponteiro como argumento*/
 	/*estamos instaciando uma função e passando o ponteiro como argumento*/
-	go funcPointer(pontTest)
+	go funcPointer(pointTest)
 
 	/**Faremos a função Main dormir por 1 segundo */
 	time.Sleep(time.Second)
@@ -38,7 +38,7 @@ func main() {
 
 	/**Por esta domindo por 1 Segundo e estarmos usando ponteiros, podemos mudar o valor da variável test e todas as go routines irão imprimir o novo valor */
 
-	*pontTest = "Novo valor do ponteiro"
+	*pointTest = "Novo valor do ponteiro"
 	/**daremos um sleep para ver o valor mudar */
 	time.Sleep(time.Second * 1) // Simula um atraso de 3 segundos
 	/**Temos uma saida e inicial e depois temos a mudança de valor*/
@@ -50,4 +50,6 @@ func main() {
 	// Novo valor do ponteiro
 	// Novo valor do ponteiro
 	fmt.Println("Fim do programa")
+
+	/**NOrmamente usamos Chanels para comunicação entre go routines e ele tem benefícios em termos de sincronização e segurança **/
 }

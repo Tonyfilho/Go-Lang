@@ -1,6 +1,6 @@
 #### Dados Assícronos em GoLang GouRoutines
 
-## 01 Aula Ponteiros
+#### 01 Aula Ponteiros
 
 https://www.youtube.com/watch?v=FLIWsfS9gTg&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb
 
@@ -14,7 +14,7 @@ https://www.youtube.com/watch?v=PMM5Fia9O4g&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-Hk
 
 Hoje falamos sobre as tão usadas e queridas, goroutines. Com elas temos infinitas possibilidades de utilização e de possíveis melhorias em performance ja que quando se trata de goroutines, estamos falando tambem de concorrência
 
-## 02B Aula Colocando a mão na massa com as GOROUTINES! - GoLang Assíncrono #go #async #goroutine
+#### 02B Aula Colocando a mão na massa com as GOROUTINES! - GoLang Assíncrono #go #async #goroutine
 
 https://www.youtube.com/watch?v=jDb_cinrDYA&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb&index=3
 
@@ -72,10 +72,10 @@ handleConn(conn)
     go handleConn(conn)
 
 
-## Aula03 Mutex
+#### Aula03 Mutex
 
 
-## Aula04 Channels 
+#### Aula04 Channels 
 /**Channels é a forma q temos de compartilhar dados entre as GoRoutines*/
 /**Channels  é usado para organizar a execução de GoRoutines*/
 /**No Exemplo de GoRoutines e Ponteiros tinhamos a situação q assim que mudarmos o valor do Ponteiro era atualizada a GoRoutines, o problema desta abordagem é que se o dado vem de fora da aplicação Ex: uma API teremos problema de time, ou seja a GoRutines passa a ficar bloqueante*/
@@ -148,3 +148,29 @@ handleConn(conn)
 /**É a forma q temos de dar um Loop no Channel, Itera os valor recebidos, o look encerra automaticamente e NÃO permite usar multiplo retorno, ou seja a variavel OK*/
 
 /**O Range não tem a variavel OK, pois só aceita valores diferente de NIL e com isto não faz sentido ter o OK, visto que nunca seria usado */
+
+
+#### Aula05 Wait Groups
+https://github.com/HunCoding/golang-asynchronous/tree/main/wait-groups
+
+# Entendendo o uso de WAIT GROUPS em GO - GoLang Assíncrono #go #async #goroutines
+/**WaitGroup é uma função do package async que trabalha junto com as GoRoutines**/
+/**A Grande utilidade é fazer aplicação rodar sem bloquear as GoRoutines e sem ficarem sem resposta, pois o codigo parou a execução, algo q ja vimos este comportamento*/
+
+/**Vamos supor q que temos um Backend e vamos fazer 5 chamadas para salvar no Banco de Dados, e cada vez que  chamamos o banco isto demora 2Segundos então temos 10Segundos, algo ruim p uma aplicação*/
+/**A solução seria concorrencia usando GoRoutines, mas como ja vimos se colocarmos as 5 GoRoutines p funcionar ao mesmo tempo, veremos q o codigo terminará antes da execução das GoRoutines, Ja vimos este comportamento, pois depois do fim do programa as GoRoutines morrem sem serem execudadas*/
+
+/**Ou Seja tinhamos 1 problema de demorar 10 Segundos e quando colocamos GoRoutines no Lugar e as mesmas morrem sem execução, criamos outro problema*/
+# 1º Exemplo faremos sem GoRoutines 
+fazendo linha por linha
+
+# Exemplo02 faremos com GoRoutine mas SEM WaitGROUP
+/**Onde veremos o comportamento que o metodo main() terminará antes q as GoRoutines exexutem!*/
+
+# Exemplo03 faremos com GoRoutines e WaitGROUP
+/**A função WaitGroup falará com a função Main(), olha temos 5 GoRoutines e preciso q espere...*/
+/**Algo assim só fecha o Main() quando a ultima GoRoutine falar que pode! É algo assim*/
+
+/**OBS: Caso pessemos um numero ha menos no Add() ex: Add(3), o Wait() so vai esperar 3 GoRoutines**/
+/**OBS: Caso passemos um numero há mais no Add() Ex: 10, teremos um erro fatal e um deadLock**/
+

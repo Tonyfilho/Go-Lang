@@ -72,7 +72,47 @@ handleConn(conn)
     go handleConn(conn)
 
 
-#### Aula03 Mutex
+#### Aula03 Mutex 
+https://github.com/HunCoding/golang-asynchronous/tree/main/mutex
+# imagem 01
+/**Usaremos Mutex quando queremos compartilhar a mesma variavel com varias GoRoutines e ter o valor iqual a todas, muito parecido com Ponteiro e GoRoutines*/
+/**Imagine 1 variavel normal sem ser o channel e 10 goRoutines ficam escrevendo e lendo concorrentemente, é Mutex q garante a segurança da atruibuição de valores, pois sem ele concorrentemente cada GoRoutine teria um valor diferente*/
+/**O que o Mutex faz: Ele fecha(Bloqueia) a variavel impedindo que outra GoRoutine leia enquanto alguem estiver atribuindo valor nesta variavel, com isto é feito um bloqueio onde somente 1 GoRoutine por escrever e ler por vez.*/
+
+# Imagem 01B
+/*Qual a diferença entre Channel e Mutex?, pois o Mutex parece com channels, mas não são*/
+/**Channels passam copias de valores*/
+/**Channels trabalham com GoRoutines*/
+/**Channels trabalham com Assícronos usando Buffer entre GoRoutines*/
+
+/**MUTEX, trabalha com Caches*/
+/**MUTEX, trabalha com Estado de uma variavel*/
+/**MUTEX é um Concurrent Safe fazendo que um varial Mutex poder ser ALTERADA apenas por 1 GoRoutine por vez*/
+
+# Imagem 02
+/**Usaremos MUTEX em caso de REUNITLIZAÇÃO de valores entre GoRoutine*/
+/**Sync.MUTEX Disponibiliza acesso exclusivo p recursos compartilhados, ou seja mais de uma variavel pode LER ao mesmo tempo. */
+
+/**Seção Critica pode ser usar de 2 formas, uma delas é com defer */
+## Sintax 
+mu.lock()
+localVariavel += amount
+mu.Unlock()
+# ou Neste ex, o defer será o ultimo a execultar no seu codigo
+mu.Lock()
+defer mu.Unlock()
+localVariavel -= amount
+# Imagem 03
+/**Sync.RMutexm permite q várias GoRoutine LEIAM ao mesmo tempo, mas somente 1 vai GRAVAR*/
+## Sintax 
+/**Cria o lock, lê o valor(return) e libera o lock do Mutex*/
+/**O Ideal seria criar um GetBalance e comportilhar entre as GoRoutines*/
+mu.RLock()
+defer mu.RUnlock()
+return localBalance 
+
+
+
 
 
 #### Aula04 Channels 
@@ -174,3 +214,137 @@ fazendo linha por linha
 /**OBS: Caso pessemos um numero ha menos no Add() ex: Add(3), o Wait() so vai esperar 3 GoRoutines**/
 /**OBS: Caso passemos um numero há mais no Add() Ex: 10, teremos um erro fatal e um deadLock**/
 
+#### Aula06 Select em GoRoutines
+https://github.com/HunCoding/golang-asynchronous/tree/main/select
+/**O Select em GoRoutines é bem parecido com SwitchCase*/
+/**O SELECT é um keyword de decisões usando o Select com GoRoutines**/
+/**Imagine q temos 3 chamadas em GoRoutine ao mesmo tempo e quem responder 1º utilizaremos, colocaaremos as 3 chamadas em Channels e quem receber 1º utiliza e cancela s outras*/
+
+## exemplo01 
+/**Entendendo o funcionamento do SELECT*/
+/**Ex: Imagine q dentro do Select temos uma GoRoutine que irá receber  time.out de 2S ou outra GouRoutine que receberá um valor de uma API, caso a API demore mais de 2S, o time.Out setará o valor na GoRoutine e fechará o Select e com isto podemos proteger o codigo em situações de demora. */
+
+
+## exemplo02  com Select  For eterno e fatal.erro
+/**Neste exemplo temos o retorno não só do 1º, mas de todos a medida q os canais recebem valores*/ 
+/**O Problema nas abordagem que o FOR gerará um error, pois continuará a esperar outras GoRoutines*/
+
+## exemplo03  com Select  For eterno e fazer a comunição Não bloqueante
+/**Para resolver a questão bloqueio, podemos criar context.done()*/
+/**E Colocar um Context, pois todo Context é um canal dentro de um Case*/
+
+
+#### Aula07 Atomic em GoLang
+https://github.com/HunCoding/golang-asynchronous/tree/main/atomic
+# Imagem 01A
+/**ATOMICS é uma forma de sincronisar recursos em GoRoutines*/
+/**Porque é muito usado em aplicações Assícronas em numeros Inteiros normamente   em Contadores*/
+/**Resumidamente o ATOMIC é uma operação q não pode ser feita pela METADE, ou se faz ou não faz! Isto n tem a ver com a operação , e sim com o estado, alterado ou mantido? Ou seja o estado de uma variavel é ATOMICO somente quando é alterado ou não, não meio alterado*/
+
+# Imagem 02
+/**Exemplos de Atomico: Ligar a luz! */
+/**Exemplos de NÃO Atomico: encher um copo de agua! Mas o copo esta pela metade? Transbordando ? ou Cheio? esta vendo a diferença? */
+/**Ou seja ou uma tarefa será feita ou não feita*/
+
+# Imagem 03
+/**UINT que dizer valores sem SINAL, e so podem ser valores positivos*/
+/**Temos variaões Uint8, 16, 32 e 64*/
+/**São Muito usado para IDs numericos*/
+
+# Imagem 04
+/**O Package Atomic em GOLang:*/
+/**Em Go, o package Atomic fornece formas primiticas de baixo nível*/
+/** Usaremos quando precisarmos comprtilhar uma variavel entre GoRoutines*/
+
+# Imagem 05
+/**Operações atomicas de baixo nivel em memoria para GoRoutines*/
+/**Operações não bloqueantes para GoRoutines*/
+/**Contadores Atomicos para GoRoutines*/
+
+## Sintaxe onde passamos o Ponteiro da Variavel
+# atomic.AddUint64(&ops,1)
+# value := atomic.LoadUint65($ops)
+
+# Exemplo SemAtomic 
+/**temos as saidas variadas*/
+// Counter: 50000
+	// Counter: 50000
+	// Counter: 49442
+	// Counter: 49994
+# Exemplo ComAtomic
+
+/**O Problema é corrigo, so temos  Counter: 50000*/
+
+#### Aula08 Sync Once
+https://github.com/HunCoding/golang-asynchronous/tree/main/once
+
+/** Sincronizando execução de funções em GoLang*/
+/**Sinc Once é uma função que garante q uma função seja executada somente uma VEZ*/
+# Imagem 01B
+/**Tudo que tiver dentro do escopo once.Do() somente é executado 1vez*/
+
+# Imagem 01C
+/**Utilize ONCE caso queira IDEMPOTÊNCIA, mesmo q tenhamos vais GoROutines Usando a mesma FUNÇÃO, o ONCE permitirar que somente seja executada 1VEZ*/
+
+# Imagem 02 Onde usar ?
+/**Imagine q tenhamos uma função. Ex: Init da sua aplicação q é usada por varias GoRoutines, para que sua aplicação seja iniciada somente 1 VEZ*/
+/**Mesmo que varias GoRoutines use esta função, somente a 1ª que chamar terá permissão de execução*/
+## OBS: É Marcado uma Flag na função q bloqueia a execução , por baixo dos panos é usado o MUTEX, mas aqui de forma facilitada 
+
+# Exemplo 01 Sem Once
+/**O Codigo será executado 20x*/
+# Imagem 03
+Executando o Codigo do Init....
+Executando o Codigo do Init....
+Executando o Codigo do Init....
+
+
+# Exemplo 02 Com Mutex no lugar do Once
+# Imagem 04
+/**Aqui para fazer funcionar, temos que criar uma Flag, um If etc, é so um exemplo como o ONCE faz por debaixo dos panos*/
+
+# Exemplo 03 Com Mutex no lugar do Once
+/**A forma mais FÁCIL é usar o ONCE!!*/
+
+# Imagem 05
+/**Dentro da classe Once, veremos algums funções*/
+# done que é uint32 que será a nossa Flag
+# m que é Mutex
+
+# Imagem 05B e 05C
+/**A função Do() recebe como paramentro uma Função*/
+
+
+#### Aula09 Sync.Cond()
+https://www.youtube.com/watch?v=M9hQdtJfkfE&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb&index=10
+
+https://github.com/HunCoding/golang-asynchronous/tree/main/signal
+# Imagem 01B
+
+/**O Cond é um Sinal q ajuda a execução de algumas GoRoutines ou não*/
+/*Hoje aprendemos um assunto bem legal a respeito de sincronizar execução de goroutines nas quais precisamos fazer com que compartihe valores e condições**/
+/**E desta forma podemos sincronizar uma ou varias GoRoutines*/
+/**Ex: Como se tivessemos um conteiner de >GoRoutines q ficam esperando um condição ser verdadeira para serem executadas.*/
+
+/**Imagine um GoRoutine q só pode executar aparti do momento q uma codição for satisfeita. Ex: 1 GoRoutine chama uma API  ou MicroService e a Outra GoRoutines pega este valores e salva em BD*/
+/**Neste caso teriamos q fazer com que a GoRoutine q vai salvar no DB fique esperando a GoRoutine que vai na API buscar os dados*/
+/**Temos varias forma de fazer, desde usar um Select ou IF*, mas a forma mais otimizada é usar o Sync.Cond()/
+
+# Imagem 02 temos um exemplo usando o Mutex, muito verboso.
+/**Poderiamos usar o Mutex ou Channels*/
+/**Uma das formas de fazer um For Infinito e comparar tamanho enquanto ele for vazio, depois dar um Lock() somente para 1 GoRoutine Gravar */
+/**Ou seja acada 100 miliS ficaremos checando dentro do FOR se alguma GoRoutine gravaou algo*/
+
+# Image 02B
+/**Criamos assim um problema performatico, pois estamos dando um look infinito, acada 100 Ms tem que checar um Map etc*/
+
+# Imagem 02C
+/**Precisamos suspender um execução de uma GoRoutine ate q ela recebe um Signal ou uma condição seja especifica*/
+/**Com isto precisamos de alguma forma avisar a GoRoutine suspendida já é hora de voltar a executar*/
+
+# Imagem 02D
+/**O CHANNEL ajudaria , pois só vai gravar a entrada se houver saida!*/
+/**Ja que um CHANNEL pode ter Buffed, posmo ficar esperando varios valores*/
+
+# Imagem 02E
+/**Se tivermos muitos CHANNEL e muitas GoRoutines? Fica inviavel dentro do codigo*/

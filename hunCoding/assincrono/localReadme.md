@@ -316,6 +316,7 @@ Executando o Codigo do Init....
 
 
 #### Aula09 Sync.Cond()
+## YNC.COND - SINCRONIZANDO EXECUÇÃO DE GOROUTINES | Golang Assincrono #go #sync #conditinal
 https://www.youtube.com/watch?v=M9hQdtJfkfE&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb&index=10
 
 https://github.com/HunCoding/golang-asynchronous/tree/main/signal
@@ -344,7 +345,77 @@ https://github.com/HunCoding/golang-asynchronous/tree/main/signal
 
 # Imagem 02D
 /**O CHANNEL ajudaria , pois só vai gravar a entrada se houver saida!*/
-/**Ja que um CHANNEL pode ter Buffed, posmo ficar esperando varios valores*/
+/**Ja que um CHANNEL pode ter Buffed, posto ficar esperando varios valores*/
 
 # Imagem 02E
 /**Se tivermos muitos CHANNEL e muitas GoRoutines? Fica inviavel dentro do codigo*/
+
+# Imagem 03 
+/**Criaremos uma Var que recebe um valor de um Ponteiro Sync:Cond**/
+/**Utilizamos o construtor sync.NewCond() q recebe uma inteface Sync.Locker()
+*/
+/**Criamos uma var q recebe a interface do Mutex*/
+# m := sync.Mutex{}
+/**Criamos o construtor newCond() q recebe a Ref. da  interface*/
+# c:= sync.NewCond(&m)
+
+# Imagem 04 e 04B
+/**Criada a Variavel c:= sync.NewCond(&m) temos agora 3 Metodos*/
+/**1º e o mais Importante*/
+# C.Wait() 
+/**Suspende a execução da GoRoutine na qual foi executada e libera o Lock() do Mutex automaticamente, por isto que recebe como paramentro do Mutex*/
+/**Não preciso me preocupar quando ficará bloqueado pelo Lock()*/
+/**Só Retorna o valor somente quando for "Acordado usando as funções BroadCast ou Signal"*/
+/**A GoRoutine bloqueada, retorna para Loop para validar novamente o valor logo depois do fim do Wait()*/
+
+# C.Signal()
+https://github.com/HunCoding/golang-asynchronous/tree/main/signal
+# Imagem 04C
+/*Acorda uma GoRoutines q espera em C**/
+/*Signal procura a GoRoutine q tiver esperando pro mais tempo e notifica/avisa ela 1º, o Signal vai usar FiFo**/
+/*Signal é ideal para poucas GoRoutines, quando for muitas é melhor o Broadcast**/
+/*1º Saida **/
+## OBS: Os tempo de atribuição são Randomicos
+Valores:  [         ]
+Valores:  [      g   ]
+Valores:  [  c    g   ]
+Valores:  [  c d   g   ]
+Valores:  [  c d   g h  ]
+Valores:  [ b c d   g h  ]
+Valores:  [a b c d   g h  ]
+Valores:  [a b c d   g h  j]
+Valores:  [a b c d   g h i j]
+Valores:  [a b c d e  g h i j]
+Valores:  [a b c d e f g h i j]
+
+/*2º Saida , será diferente da 1º  **/
+## OBS: Os tempo de atribuição são Randomicos
+Valores:  [         ]
+Valores:  [   d      ]
+Valores:  [ b  d      ]
+Valores:  [ b  d   g   ]
+Valores:  [ b  d   g   j]
+Valores:  [a b  d   g   j]
+Valores:  [a b  d   g  i j]
+Valores:  [a b  d  f g  i j]
+Valores:  [a b  d e f g  i j]
+Valores:  [a b  d e f g h i j]
+Valores:  [a b c d e f g h i j]
+/**No SIGNAL() para cada letra inseriada, ele PRINTA e CHECA se tem espaço e manda um SINAL*/
+
+
+
+
+
+
+# C.BroadCast()
+# Imagem 04D
+/**A diferença do Signal() é que em Broadcast(), todas as GoRoutines utilizam a var C e executaram o C.Wait() */
+/**É permitido mas não necessario da GoRoutine que chamar o BroadCast() ficar com o lock ativo*/
+/**Imagine q tenha 100 GoRoutines. O Signal vai 1 por uma procurando q está em lock(), mas BroadCast acorda a todas */
+## OBS: o UnLock() é automatico, pois ja passamos a interface por Paramentro.
+
+# Imagem 05 com Signal
+/**Exemplos de codigo*/
+
+# Imagem 06 com BroadCast

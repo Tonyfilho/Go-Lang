@@ -9,7 +9,7 @@ func main() {
 
 	fmt.Println("Aula 09 Sync.COND.")
 	fmt.Println()
-	fmt.Println("Neste Exemplo NÃO usaremos o Once.")
+	fmt.Println("Neste Exemplo NÃO usaremos o Cond ")
 	fmt.Println()
 	
 	var wg sync.WaitGroup

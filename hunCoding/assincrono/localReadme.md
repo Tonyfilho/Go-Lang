@@ -370,6 +370,7 @@ https://github.com/HunCoding/golang-asynchronous/tree/main/signal
 
 # C.Signal()
 https://github.com/HunCoding/golang-asynchronous/tree/main/signal
+## OBS: Aqui no Signal a 1º GoRoutine q chamou o c.Wait() será a 1º q será notificada pelo Signal
 # Imagem 04C
 /*Acorda uma GoRoutines q espera em C**/
 /*Signal procura a GoRoutine q tiver esperando pro mais tempo e notifica/avisa ela 1º, o Signal vai usar FiFo**/
@@ -403,19 +404,21 @@ Valores:  [a b  d e f g h i j]
 Valores:  [a b c d e f g h i j]
 /**No SIGNAL() para cada letra inseriada, ele PRINTA e CHECA se tem espaço e manda um SINAL*/
 
+# Imagem 05 com Signal
+/**Exemplos de codigo*/
 
 
 
 
 
 # C.BroadCast()
+## OBS: Aqui no BroadCast caso haja 100 GoRoutine com c.Wait() serão as 100º q serão notificada pelo Signal ao mesmo tempo.
+https://github.com/HunCoding/golang-asynchronous/tree/main/broadcast
 # Imagem 04D
 /**A diferença do Signal() é que em Broadcast(), todas as GoRoutines utilizam a var C e executaram o C.Wait() */
 /**É permitido mas não necessario da GoRoutine que chamar o BroadCast() ficar com o lock ativo*/
 /**Imagine q tenha 100 GoRoutines. O Signal vai 1 por uma procurando q está em lock(), mas BroadCast acorda a todas */
 ## OBS: o UnLock() é automatico, pois ja passamos a interface por Paramentro.
 
-# Imagem 05 com Signal
-/**Exemplos de codigo*/
 
 # Imagem 06 com BroadCast

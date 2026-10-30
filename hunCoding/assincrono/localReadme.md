@@ -422,3 +422,65 @@ https://github.com/HunCoding/golang-asynchronous/tree/main/broadcast
 
 
 # Imagem 06 com BroadCast
+/**O Broadcast emite o sinal com milionesiomo de segundo de diferença*/
+GoRoutines01 wait
+GoRoutines02 wait
+GoRoutines03 wait
+Main()....GoRoutine ...Mundando Valor da SharedRSC.....
+Main()....GoRoutine Broadcast().....
+2026-10-30 19:01:39.210669 +0000 GMT m=+2.000999701
+Sinal BroadCast emitido em SharedRSC GoRoutines01 true
+2026-10-30 19:01:39.2112463 +0000 GMT m=+2.001577001
+Sinal BroadCast emitido em SharedRSC GoRoutines02 true
+Fim do Main().......
+
+#### Aula10 Sync vs Async
+/**Imagine uma lista de 100 indices, caso queria printar na ordem usarmeos o fluxo Sincrono, mas caso queira printar todos juntos usaremos o Assincrono*/
+# Imagem 01 Sync vs Async
+/**Veremos neste topico a diferença entre um projeto Syncrono e Assyncrono*/
+/**Veremos se temos ganho de performace*/
+https://github.com/HunCoding/golang-asynchronous/tree/main/syncVsAsync
+
+https://www.youtube.com/watch?v=8keTdKWi91w&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb&index=13
+
+/**Hoje entendemos na teoria como conseguimos definir nossa aplicação para seguir uma arquitetura assincrona ou sincrona, pois é algo que tem de ser deffinido antes mesmo de definir o que vai ser feito no codigo, pois essa decisão altera toda a arquitetura do sistema*/
+
+# Imagem 02 Fluxo Sincrono
+/**É um modelo Unithread*/
+/**O Fluxo Syncrono so pode começar uma nova tarefa quando terminar a tarefa atual, há não ser que a nova tarefa seja invocada pela tarefa atual*/
+# Imagem 03 Fluxo Assincrono
+## Em nosso caso é a GoRoutine
+/**É um modelo Mutithread*/
+/***É aplicavel a Redes e Communicação/
+/**É uma arquitetura sem bloqueio*/
+/**Varia operações assincronas podem ser executadas ao mesmo tempo*/
+
+# Imagem 04  Quando usar o Sincrono ?
+/**Diferentemente da programação Assincrona, a Sincrona  é bastante direta e fácil de escrever não requer rastreamento tipo, canal, waitGroup e buffer etc. O Sincrono é bem simples*/
+/**Neste caso o que devemos saber se as tarefas executadas pode ser indendentes sem interrpmper uma as outras*/
+## /**Exemplo de quando não deveriamos usar */
+/**Imagine um exemplo hipotetico de  uma API q busca todos estados ou seja 27 as cidades em ordem alfabetica montarimos uma lista de estados e cidades, se usasemos Assincronos ou seja GoRoutines teriamos q usar 27 GoRoutines q fariam tudo concorrentemente e com isto na hora de juntas todos os valores como foi Assincronos isto montaria uma lista  desordenada tendo que ordenar e levar mais tempo **/
+
+# Imagem 05 Quando usar o Assincrono ?
+/**Usamos o Assincrono quando temos tarefas  independentes q tenham papel crítico*/
+/**Projetos com um grande numero de iterações*/
+/**Projetos onde não precisamos de sequencia fixas*/
+## Exemplo
+/**Imagines um array de 1.000.000 fotos onde precisamos gerar um thumbnail */
+/**Ao invez de fazer isto de forma sincrona 1 por vez, podemos dividir isto em 100 GoRoutines e com  isto cada uma ficar com 10.000 , olhe o tempo que pouparemos*/
+/**Ou seja guanharemos performace com o Assicrono*/
+/**Os Principais uso são:*/
+/**Quando temos uma Iteração gigante onde podemos dividir entre GoRotines estas tarefas**/
+/**Quando precisamos chamar algo, sem que precisamos de uma resposta*/
+
+# Imagem 06 exemplo de um request Sincrono
+/**Neste caso um CRUD que faremos em Go*/
+/**No Exemplo da imagem não faz sentido usar Assincrono*/
+/**Temos uma ordem, usuario -> Requisição -> Controller -> Service -> Repository -> Banco de dados*/
+
+# Imagem 07 exemplo de uma requisição Assincrona
+/**Neste exemplo temos uma equipe de produtos*/
+/**E temos um banco com usuários*/
+/**Imagine q a equipe de produtos quer enviar um email para  alguns clientes especificos desta base, Ex: Uma promoção*/
+/**Ou seja será uma lista fechada com algusn clientes especiais e enviaremos o mesmo email so mudando o destinatario e o nome*/
+/**Nest caso faz sentido pois temos uma lista gigante de email q temos de enviar e todos os email não em ordem de envio, precisamos de PERFORMACE, então neste caso as GoRoutines entrariam**/

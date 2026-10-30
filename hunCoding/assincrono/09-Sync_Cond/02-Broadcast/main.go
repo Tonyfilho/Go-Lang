@@ -33,11 +33,15 @@ func main() {
 			fmt.Println("GoRoutines01 wait")
 			c.Wait()
 		}
-		/***Assim que emitimos o Broadcast sairemos do For/
-		fmt.Println("Sinal BroadCast emitido em SharedRSC", sharedRsc)
+		/**vendo time do recebimento*/
+		fmt.Println(time.Now().String())
+		/***Assim que emitimos o Broadcast sairemos do For*/
+		fmt.Println("Sinal BroadCast emitido em SharedRSC GoRoutines01", sharedRsc)
 		/**7º daremos umUnlock() fora do For*/
 		c.L.Unlock()
 		/**8º daremos um Done(), pois ja terminamos*/
+		wg.Done()
+
 	}()
 	go func() {
 		c.L.Lock()
@@ -47,11 +51,14 @@ func main() {
 			fmt.Println("GoRoutines02 wait")
 			c.Wait()
 		}
-		/***Assim que emitimos o Broadcast sairemos do For/
-		fmt.Println("Sinal BroadCast emitido em SharedRSC", sharedRsc)
+		/**vendo time do recebimento*/
+		fmt.Println(time.Now().String())
+		/***Assim que emitimos o Broadcast sairemos do For*/
+		fmt.Println("Sinal BroadCast emitido em SharedRSC GoRoutines02", sharedRsc)
 		/**7º daremos umUnlock() fora do For*/
 		c.L.Unlock()
 		/**8º daremos um Done(), pois ja terminamos*/
+		wg.Done()
 	}()
 	go func() {
 		c.L.Lock()
@@ -61,11 +68,14 @@ func main() {
 			fmt.Println("GoRoutines03 wait")
 			c.Wait()
 		}
-		/***Assim que emitimos o Broadcast sairemos do For/
-		fmt.Println("Sinal BroadCast emitido em SharedRSC", sharedRsc)
+		/**vendo time do recebimento*/
+		fmt.Println(time.Now().String())
+		/***Assim que emitimos o Broadcast sairemos do For*/
+		fmt.Println("Sinal BroadCast emitido em SharedRSC GoRoutines03", sharedRsc)
 		/**7º daremos umUnlock() fora do For*/
 		c.L.Unlock()
 		/**8º daremos um Done(), pois ja terminamos*/
+		wg.Done()
 	}()
 
 	/**8º Temos q dar time Sleep para dar tempo de atulizar os valores da Var SharedRSC */
@@ -81,7 +91,6 @@ func main() {
 	c.L.Unlock()
 	/**12º usando Wait() mas do WaitGroup e não do COND para finalizar */
 	wg.Wait()
-
 
 	fmt.Println("Fim do Main().......")
 	fmt.Println()

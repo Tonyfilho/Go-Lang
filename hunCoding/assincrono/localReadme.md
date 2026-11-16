@@ -566,3 +566,6 @@ Filósofo 5 está devolvendo o garfo da direita...
 
 /**Aprenderemos como fazer o processamento*/
 /*O Objetiuvo é transformar as imagens grandes em imagens pequenas com qualidade menor**/
+/**temos 2 exemplos com e sem GoRoutines*/
+/*No 1º exemplo tivemos 3825 Milissegundos**/
+/*No 2ª exemplo tivemos 948 Milissegundos*/

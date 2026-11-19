@@ -562,6 +562,8 @@ Filósofo 5 está devolvendo o garfo da direita...
 
 
 #### Aula 13 Processando THUMBNAILS de imagens utilizando Goroutines e Waitgroups em GoLang!
+## Obs:  tem q dar o "go mod init + nome" para criarmos o packages
+https://www.youtube.com/watch?v=neVAU4DPqIc&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb
 /**esta é uma tarefa onde gastamos tempo de processamento, então é um otimo modelo de uso de GoRoutines*/
 
 /**Aprenderemos como fazer o processamento*/
@@ -569,3 +571,28 @@ Filósofo 5 está devolvendo o garfo da direita...
 /**temos 2 exemplos com e sem GoRoutines*/
 /*No 1º exemplo tivemos 3825 Milissegundos**/
 /*No 2ª exemplo tivemos 948 Milissegundos*/
+
+#### Aula 14 Processando Gerenciando erros dentre várias funções assíncronas em GoLang
+## OBS tem q dar o "go mod init + nome" para criarmos o packages
+https://www.youtube.com/watch?v=K8w4xCX18Cg&list=PLm-xZWCprwYQz7Di62Z93zGHyLC-HkFpb&index=17
+https://pkg.go.dev/golang.org/x/sync/errgroup
+https://github.com/HunCoding/golang-basics/blob/main/errgroup/main.go
+
+/*ErrGroup é a forma comum para se resolver problemas em Go em forma Assincrona**/
+/**No caso de quando temos Channels temos um objeto onde temos o valor e o erro, desta forma podemos controlar*/
+/**Dentro de cada objeto de cada channel se temos valor ou error, desta forma é custoso ficar olhando desta forma o que veio no objeto*/
+/**O ErrGroup é a forma mais fácil que temos de tratar um grupo GoRoutines ou Grupo de processo assincronos e seus  errors*/
+/**Usaremos um exemplo onde temos 3 URLs para dar um get*/
+/**Exemplo01. Nesta abordagem temos problemas*/
+/**Imagine q não pudesse dar o PANIC mas saber quem errou para ter outra abordagem Ex: mudar de rota em caso de error*/
+
+## Exemplo02 daremos uma solução funcional mas não tão boa
+/**Criaremos channel para cada url*/
+/**Criaremos um switch Case para cada URl*/
+/**Criaremos um FOR eterno e dentro temos q por o Select*/
+/**Dentro do For um Select para cada channel*/
+/***temos que ter muito codigo para tentar fazer  mesmo que ErrGroup faz*/
+/**observamos o tanto de codigo q temos de fazer sem o errGroup*/
+
+
+

@@ -594,5 +594,34 @@ https://github.com/HunCoding/golang-basics/blob/main/errgroup/main.go
 /***temos que ter muito codigo para tentar fazer  mesmo que ErrGroup faz*/
 /**observamos o tanto de codigo q temos de fazer sem o errGroup*/
 
+## Exemplo03 aplicaremos o ErrGroup no mesmo codigo, removendo os selects for etcs
 
+# temos q fazer uma importação da biblioteca "golang.org/x/sync/errgroup"
+#  Caso a IDE não baixe temos q dar um go mod tidy "golang.org/x/sync/errgroup"
+/**Não precisamos de channels*/
+/**Não precisamos waitGroup*/
+/**Não precisamos de goRoutines Anonimas */
+/*Somente usamos o ErrGroup**/
+/**saida com erro*/
+# Erro ao fazer requisição Get para https://x.comnn: Get "https://x.comnn": dial tcp: lookup x.comnn: no such host
+# Erro encontrado: Get "https://x.comnn": dial tcp: lookup x.comnn: no such host
 
+## O Exemplo04 É um codigo um pouco diferente mas complexo onde temos o uso errGroup
+/**Criaremos uma função de gerar Tasks de acertos ou erros aleatorios*/
+/**Criaremos a Var de errGroup*/
+/**Criaremos uma var de Contexto para controlar tempo de execução ou fechar */
+/*saida no prompt**/
+Processamento bem-sucedido para 4
+Processamento bem-sucedido para 5
+Processamento bem-sucedido para 3
+Processamento bem-sucedido para 14
+Processamento bem-sucedido para 1
+Processamento bem-sucedido para 2
+Processamento bem-sucedido para 7
+Processamento bem-sucedido para 13
+Processamento bem-sucedido para 6
+Processamento bem-sucedido para 12
+Processamento  interrompido devido a error: erro aleatório ao processar 11
+Total as tarefas concluidas: 10/20
+
+/*desta forma podemos saber quantas tarefas deu certo e quem deu errado sem o uso do channel**/

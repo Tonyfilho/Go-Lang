@@ -2,10 +2,19 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"sync"
 )
+
+/**1º Criaremos canais para receber os resultados das requisições */
+/**2º Mas não podemos somente receber STRINGs*/
+/**post01Ch := make(chan string)*/
+/**2B temos que criar um struct para armazenar o resultado e o erro */
+type Result struct {
+	URL        string
+	Err        error
+	StatusCode int
+}
 
 func main() {
 	fmt.Println("Aula 14 Gerenciando erros dentre várias funções assíncronas em GoLang")
@@ -14,18 +23,9 @@ func main() {
 	urls := []string{
 		"https://golang.org",
 		"https://google.com",
-		"https://x.comdfdsgfSG", // URL inválida para simular erro
+		"https://x.com", // URL inválida para simular erro
 	}
 	var wg sync.WaitGroup
-	/**1º Criaremos canais para receber os resultados das requisições */
-	/**2º Mas não podemos somente receber STRINGs*/
-	/**post01Ch := make(chan string)*/
-	/**2B temos que criar um struct para armazenar o resultado e o erro */
-	type Result struct {
-		URL        string
-		Err        error
-		StatusCode int
-	}
 	urlChannel01 := make(chan Result)
 	urlChannel02 := make(chan Result)
 	urlChannel03 := make(chan Result)
@@ -35,30 +35,29 @@ func main() {
 	for _, url := range urls {
 
 		wg.Add(1)
-
 		go func(localUrl string) {
-
+			
 			defer wg.Done()
 
 			req, err := http.Get(localUrl)
 			if err != nil {
-				fmt.Printf("Erro ao fazer requisição para %s: %v\n", localUrl, err)
-				log.Panic(err)
+				fmt.Printf("Erro ao fazer requisição Get para %s: %v\n", localUrl, err)
+				panic(err)
 			}
-
 			defer req.Body.Close()
+
 			/***04º depois do defer iremos ter que saber qual channel deu error*/
 			/**Lembrando que caso esteja tudo bem o erro será nil*/
 			/**Escolheremos o channel 03 para ser o default de erros de requisição*/
 
 			switch localUrl {
 			case "https://golang.org":
-				urlChannel01 <- Result{URL: localUrl, Err: err, StatusCode: req.StatusCode}
+				urlChannel01 <- Result{URL: localUrl, Err: nil, StatusCode: req.StatusCode}
 			case "https://google.com":
-				urlChannel02 <- Result{URL: localUrl, Err: err, StatusCode: req.StatusCode}
+				urlChannel02 <- Result{URL: localUrl, Err: nil, StatusCode: req.StatusCode}
 			// case "https://jsonplaceholder.typicode.com/posts/3":
 			default:
-				urlChannel03 <- Result{URL: localUrl, Err: err, StatusCode: req.StatusCode}
+				urlChannel03 <- Result{URL: localUrl, Err: nil, StatusCode: req.StatusCode}
 			}
 
 		}(url)
@@ -66,7 +65,8 @@ func main() {
 	}
 
 	/**05º como temos vários canais, vamos ler todos eles dentro de um For infinito */
-	for {
+	recebidos := 0
+	for recebidos < len(urls) {
 		select {
 		case res := <-urlChannel01:
 			if res.Err != nil {
@@ -74,22 +74,25 @@ func main() {
 				panic(res.Err)
 			}
 			fmt.Printf("Resposta para %s: %d\n", res.URL, res.StatusCode)
+			recebidos++
 		case res := <-urlChannel02:
 			if res.Err != nil {
 				fmt.Printf("Erro será tratado")
 				panic(res.Err)
 			}
 			fmt.Printf("Resposta para %s: %d\n", res.URL, res.StatusCode)
+			recebidos++
 		case res := <-urlChannel03:
 			if res.Err != nil {
 				fmt.Printf("Erro será tratado no X")
 				panic(res.Err)
 			}
 			fmt.Printf("Resposta para %s: %d\n", res.URL, res.StatusCode)
+			recebidos++
 
-			wg.Wait()
 		}
-
+		
+		wg.Wait()
 	}
 
 }

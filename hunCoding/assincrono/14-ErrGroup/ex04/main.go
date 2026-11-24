@@ -11,12 +11,14 @@ import (
 )
 
 
+/*Tudo começa com Interface de Error, que gerencia os erros no ciclo do codigo**/
+/**quando usamos Errof é diparado um erro de mau funcionamento e com isto podemos dar o exemplo de erro de request**/
 /*1º Criaremos uma função para de gerar acerto ou erros aleatórios onde é tipada com interface de error*/
 /**Resulmo deste exemplo ao invez de criar um Channel para cada process Task retorna-se um error*/
 /**E pegarmos o error deste Channel e fossemos para select para retonar o valor no select e criar outro
 channel para printar e saber quantas task deram erradas*/
 /**Usaremos o g.Wait() */
-func processTask(id int) error {
+func taskOrErrorGenerated(id int) error {
 	//fmt.Println("erro aleatório %d", id)
 	/**Aqui criaremos um DELAY randonico, teando simular um request onde acada x numeros teremos um erro*/
 	delay := time.Duration(rand.Intn(1000)) * time.Microsecond
@@ -41,7 +43,7 @@ func main() {
 	defer cancel()// Garante que o cancelamento seja chamado ao final da função main
 	/**2ºB teremos 5 execuções simultâneas, desta saberemos quantas foram concluídas* ou deram erro*/
 	maxTasks := 5
-	semaphore := make(chan struct{}, maxTasks) // Limita a 5 goroutines simultâneas
+	semaphore := make(chan struct{}, maxTasks) // Limita a 5 goroutines simultâneas ou seja um buffer
 	/**3º Erro Group e Mutex para tratar das funções Assíncronas*/
 	var g errgroup.Group // Cria um grupo de goroutines para gerenciar funções assíncronas
 	var mu sync.Mutex // Mutex para proteger o acesso à variável completedTasks
@@ -49,11 +51,12 @@ func main() {
 	completedTasks := 0 // Variável para contar o número de tarefas concluídas
 
 	/*4º Agora vamos criar um loop para gerar 20 tarefas assíncronas*/
+	/* OBS:assim que for detectado um erro emitido pela Interface de ERRO, ctx desliga a Emissão das go routines */
 	for i := 1; i <= totalTasks; i++ {
 		i := i // Copiar a variável local para evitar problemas de concorrência
 		/**5ª começaremos com o ErrGroup  para cada função*/
 		g.Go(func() error {
-			semaphore <- struct{}{} // Adquire um slot no semáforo vazio
+			semaphore <- struct{}{} // Adquire um slot no semáforo vazio para não ser nulo
 			defer func() { <-semaphore }()// fica esperando a Struct terminar
             /**6º Aqui dentro do semafarto colocaremos um selec*/
               select {
@@ -66,7 +69,7 @@ func main() {
 				/** com o valor de 0 a 19*/
 				/**E se caso aconteça algum error, chamaremos o cancel e retornaremos o erro*/
 				/**Lembrando q dentro desta task temos um valor randomico de dar erro*/
-				if  err := processTask(i); err != nil {
+				if  err := taskOrErrorGenerated(i); err != nil {
 					cancel()
 					return err
 				}

@@ -795,3 +795,34 @@ semaphore	:          Mecanismo separado para limitar quantas rodam ao mesmo temp
 
 ## O Exemplo 04B Versão "limpa" equivalente (para comparar) com exemplo 04
 /**Note que sumiu o cancel() manual — errgroup.WithContext faz isso pra você.*/
+
+# imagem 05 mostra um erro simulado entre a GoRoutine 03 e a 07
+
+## O Exemplo 05 é o mesmo ou seria o mesmo codigo do Ex04 e 04B sem ErrGroup
+
+# O que você teve que fazer na mão (e o errgroup faz pra você)
+/*Passo manual	Equivalente no errgroup*/
+/*wg.Add(1) antes de cada go	g.Go(...) já faz*/
+/*defer wg.Done()	g.Go(...) já faz*/
+/*Criar errCh := make(chan error, N)	interno*/
+/*Enviar errCh <- err (e nil no sucesso)	return err / return nil*/
+/*Goroutine extra go func(){ wg.Wait(); close(errCh) }()	interno*/
+/*Loop for err := range errCh coletando o 1º erro	g.Wait() retorna direto*/
+/*Guardar firstErr com lógica de "só o primeiro"	interno*/
+/*Chamar cancel() quando falha	automático com errgroup.WithContext*/
+# Ou seja: o errgroup é literalmente esse bloco de código empacotado numa struct. Nada de mágico.
+# imagem 06  Por que close(errCh) precisa de uma goroutine separada?
+# imagem 07 O errgroup também tem esse "problema" do primeiro erro?
+
+
+## Exemplo 06 ErrGroup e g.SetLimite()
+# imagem 08 g.SetLimit(n) (errgroup tem isso desde a v1.1.0 — substitui o semáforo!).
+
+/*limite de concorrência: substitui o chan struct{} semáforog.SetLimit(maxTasks)*/
+
+# imagem 08B O que desapareceu em relação à versão do curso
+/**Diferente do semáforo manual (que bloqueava dentro da goroutine), o SetLimit bloqueia o loop principal quando já há N goroutines rodando:*/
+# imagem 08C
+/**Consequência: menos goroutines criadas ao mesmo tempo (mais leve), mas o loop for fica mais lento. No seu caso (20 tarefas) é irrelevante — mas vale saber.*/
+
+/**Sim, por um motivo sutil: quando uma tarefa falha, errgroup chama cancel(). As goroutines já rodando veem ctx.Done() no select e saem. As que ainda estão no loop esperando vaga (g.Go bloqueado) também são liberadas — mas vão executar a função e cair direto no case <-ctx.Done(): return ctx.Err(). Por isso o select no começo da função ainda faz sentido: evita chamar processTask à toa.*/
